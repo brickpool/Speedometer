@@ -78,7 +78,7 @@ In der fertigen Schaltung wird zusätzlich noch ein Stützkondensator C8 von 100
 - Elektronik-Kompendium; [Das MonoFlipflop und eine praktische Anwendung](https://www.elektronik-kompendium.de/public/schaerer/monoff.htm)
 - Elektronik-Kompendium; [PLL-Frequenzsynthese: Spezielles Problem mit dem CD4046B](http://www.elektronik-kompendium.de/public/schaerer/pll4046.htm)
 - Elektronik-Kompendium; [Ein spannungsgesteuerter Oszillator (VCO) mit dem CD4046B](http://www.elektronik-kompendium.de/public/schaerer/vco.htm)
-- Umnicom von uwe.mnich@t-online.de; [Spannungsgesteuerter Oszillator](http://www.umnicom.de/Elektronik/Schaltungssammlung/Vco/Vco.html#8.2)
+- Umnicom von uwe.mnich@t-online.de; [Spannungsgesteuerter Oszillator](https://web.archive.org/web/20170916025339/http://www.umnicom.de/Elektronik/Schaltungssammlung/Vco/Vco.html#8.2)
 - Institute Newton C. Braga Ltd; [Voltage-Controlled Oscillator [VCO] Using the 4046 (CB109)
 ](http://www.incbtech.com/index.php/circuit-bench/58-converters/168-voltage-controlled-oscillator-vco-using-the-4046-cb109)
 

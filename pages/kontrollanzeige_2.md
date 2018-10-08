@@ -4,7 +4,7 @@ title: Lade- und Öldruckkontrollanzeige mit CMOS
 description: Universal LCD Motorrad Tachometer
 ---
 
-Ziel ist es sowohl die NPN-Schaltstufe hinzu als auch PNP-Schaltstufe durch ein IC zu ersetzen. Zur Anwendung kommt der Baustein CD4093B (Datenblatt: [cd4093bc.pdf](www.ti.com/lit/ds/symlink/cd4093bc.pdf)), welches vier NAND-Schmitt-Trigger mit je 2 Eingängen zum Einsatz. An den Betriebsspannungsanschlüssen sind bei der CMOS Familie 4000 eine Spannung für Vcc (= Betriebsspannung) von +3V bis +18V und für Vss (= Masse) 0V anzulegen.
+Ziel ist es sowohl die NPN-Schaltstufe hinzu als auch PNP-Schaltstufe durch ein IC zu ersetzen. Zur Anwendung kommt der Baustein CD4093B (Datenblatt: [cd4093bc.pdf](http://www.ti.com/lit/ds/symlink/cd4093bc.pdf)), welches vier NAND-Schmitt-Trigger mit je 2 Eingängen zum Einsatz. An den Betriebsspannungsanschlüssen sind bei der CMOS Familie 4000 eine Spannung für Vcc (= Betriebsspannung) von +3V bis +18V und für Vss (= Masse) 0V anzulegen.
 
 Aufgabe der NPN-Schaltstufe war es das Signal zu invertieren. Die folgende einfacher Schaltung kann die Funktion mittels 4093 abbilden.
 
