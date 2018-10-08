@@ -17,7 +17,7 @@ Die folgende Beispielschaltung soll an einem Fahrzeug mit 12V-Netz eine Kontroll
 ![Lade-/Öldruckkontrollanzeige](../images/Kontrollanzeige.png)
 
 ## Messen der Spannung an Kl.61
-Im Internet gibt es hierzu Beispielkonfiguration auf Basis eines TL431AC. Der TL431 ist laut Datenblatt (www.ti.com/lit/ds/symlink/tl431.pdf) eine "Programmable Voltage Reference", arbeitet im Prinzip als einstellbare Z-Diode. Der Baustein ist klein genug um kommt im TO92 Gehäuse daher. Mit einem
+Im Internet gibt es hierzu Beispielkonfiguration auf Basis eines TL431AC. Der TL431 ist laut Datenblatt (http://www.ti.com/lit/ds/symlink/tl431.pdf) eine "Programmable Voltage Reference", arbeitet im Prinzip als einstellbare Z-Diode. Der Baustein ist klein genug um kommt im TO92 Gehäuse daher. Mit einem
 Spannungsteiler an Vref lässt sich stufenlos eine Spannung zwischen circa 2,5V und 36V einstellen. Da intern ein Operationsverstärker genutzt wird, schaltet der TL431 mit hoher Genauigkeit.
 
 Der Spannungsteiler aus R1 und R2 lässt sich mit folgender Formel bestimmen.
@@ -42,7 +42,7 @@ Bei einer Versorgungsspannung von 10-15V und einem Widerstand R3 von ca. 4,7kOhm
 ## Schalten der Versorgungsspannung
 Die Kontrollleuchte ist im Instrument gegen Masse geschaltet. Sie erfordert also das schalten Versorgungsspannung. Da dies weiterhin elektronisch passieren soll, nutzen wir hierzu ein PNP-Transistor. Hier liegt der Emitter an der Versorgungsspannung vom Fahrzeug (Kl. 30).
 
-Zur Anwendung kommt ein Transistor Typ BC557B (Datenblatt: https://www.fairchildsemi.com/ds/BC/BC560.pdf) der die Kontrollleuchte La1 bei 12V mit einer gemessenen Last von 2,7kOhm schalten soll.
+Zur Anwendung kommt ein Transistor Typ BC557B (Datenblatt: http://www.fairchildsemi.com/ds/BC/BC560.pdf) der die Kontrollleuchte La1 bei 12V mit einer gemessenen Last von 2,7kOhm schalten soll.
 
 ![Schalten der Versorgungsspannung Abb. 1](../images/Schalten_der_Versorgungsspannung_1.png)
 
@@ -82,7 +82,7 @@ R8 sollte nicht zu groß gewählt sein, um den Spannungsabfall an R8 klein zu ha
 Die Kontrollanzeige La1 soll bei Verlust des Öldrucks zur Anzeige kommen. Der Öldrucksensor S1 schaltet gegen Masse. Die Integration des Sensors erfolgt über einfach unter Nutzung einer Schutzdiode.
 
 ## Invertieren der Messstufe
-Es soll mit _positiver_ Logik geschaltet werden, also fügen wir eine NPN-Schaltstufe hinzu, die den Eingang der PNP-Schaltstufe versorgt. Zur Anwendung kommt der passende NPN-Transistor Typ BC547B (Datenblatt: https://www.fairchildsemi.com/datasheets/BC/BC547.pdf).
+Es soll mit _positiver_ Logik geschaltet werden, also fügen wir eine NPN-Schaltstufe hinzu, die den Eingang der PNP-Schaltstufe versorgt. Zur Anwendung kommt der passende NPN-Transistor Typ BC547B (Datenblatt: http://www.fairchildsemi.com/datasheets/BC/BC547.pdf).
 
 ![Invertieren der Messstufe](../images/Invertieren_der_Messstufe.png)
 
@@ -111,13 +111,11 @@ Die Differenz zur Schaltschwelle der Messstufe (bei _Low_ definiert über Vka = 
 
 ### Links
 - Pauls Werkstatt von Paul; [Ladekontrollleuchte mit TL431](http://pauls-werkstatt.blogspot.de/2015/06/ladekontrollleuchte-mit-tl431.html)
-- Fingers elektrische Welt; [Kurze Frage -> schnelle Antwort: Ladekontrollleuchte, Seite 254] (http://www.fingers-welt.de/phpBB/viewtopic.php?f=14&t=30&hilit=PLC_1&start=6325)
+- Fingers elektrische Welt; [Kurze Frage -> schnelle Antwort: Ladekontrollleuchte, Seite 254](http://www.fingers-welt.de/phpBB/viewtopic.php?f=14&t=30&hilit=PLC_1&start=6325)
 - Netzmafia von Prof. Jürgen Plate; [Präzisions-Shunt-Regler TL431](http://www.netzmafia.de/skripten/hardware/TL431/index.html)
 - KHD-Homepage von Karl-Heinz Domnick; [Transistor-Schaltungen](http://www.domnick-elektronik.de/elekts1.htm)
 - DL6GL von Georg Latzel; [Schalten mit Transistoren](http://dl6gl.de/grundlagen/schalten-mit-transistoren)
 - Elektronik-Kompendium; [Schalten und Steuern mit Transistoren I](http://www.elektronik-kompendium.de/public/schaerer/powsw1.htm)
-- Elektronik-Kompendium; [Pullup-, Pulldown-Widerstand , Maßnahmen zur Entstörung bei langer Leitung, Openkollektor - Wired-OR - Latchup-Risiken](http://www.elektronik-kompendium.de/public/schaerer/pullr.htm)
-- Elektronik-Kompendium; [Überspannungsschutz von empfindlichen Verstärkereingängen](http://www.elektronik-kompendium.de/public/schaerer/ovprot.htm)
 
 ### Nächste Seite
-Weiter mit [Umsetzung in CMOS](pages/cmos.html).
+Weiter geht's mit [Lade- und Öldruckkontrollanzeige mit CMOS](kontrollanzeige_2.html).

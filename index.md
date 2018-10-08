@@ -4,9 +4,9 @@ title: Tachokombiinstrument
 description: Universal LCD Motorrad Tachometer
 ---
 
-Bei eBay werden diverse "Universal LCD Motorrad Tachometer" mit Drehzahlmesser und Kilometerzähler angeboten.
+Bei eBay werden diverse __Universal LCD Motorrad Tachometer__ mit Drehzahlmesser und Kilometerzähler angeboten.
 
-![Tachokombiinstrument](images/Tachometer.jpg)
+![12000RMP LCD Digital Speedometer Odometer Motorcycle 1-4 Cylinders](images/1f288ea0-4b53-48eb-83f8-2e735e214100.jpg)
 
 Dass die Tachometer häufiger nicht direkt funktionieren bzw. man sich die wichtigen Infos selber besorgen muss, ist leider bei den China Sachen häufiger der Fall. Den Kommentaren nach, haben Einige den Tachometer zum Laufen bekommen.
 
@@ -85,4 +85,4 @@ Das Signal für den Drehzahlmesser kommt von Klemme 1 der Zündspule über einen
 - Banggood.com; [12000RMP LCD Digital Speedometer Odometer Motorcycle 1-4 Cylinders](http://www.banggood.com/en/12000-RMP-LCD-Digital-Speedometer-Odometer-Motorcycle-1-4-Cylinders-p-972677.html)
 
 ### Nächste Seite
-Weiter mit [Lade- und Öldruckkontrollanzeige](pages/kontrollanzeige.html).
+Weiter geht's mit [Lade- und Öldruckkontrollanzeige](pages/kontrollanzeige_1.html).
