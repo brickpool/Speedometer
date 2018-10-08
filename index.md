@@ -6,17 +6,17 @@ description: Universal LCD Motorrad Tachometer
 
 Bei eBay werden diverse "Universal LCD Motorrad Tachometer" mit Drehzahlmesser und Kilometerzähler angeboten.
 
-![Tachokombiinstrument](https://github.com/brickpool/Speedometer/images/Tachometer.jpg)
+![Tachokombiinstrument](images/Tachometer.jpg)
 
 Dass die Tachometer häufiger nicht direkt funktionieren bzw. man sich die wichtigen Infos selber besorgen muss, ist leider bei den China Sachen häufiger der Fall. Den Kommentaren nach, haben Einige den Tachometer zum Laufen bekommen.
 
 ## Instrumentenseite
 ### 20pol Buchse Molex 5557
-![20pol Buchse Molex 5557](https://github.com/brickpool/Speedometer/images/20pol_Molex_5557.png)
+![20pol Buchse Molex 5557](images/20pol_Molex_5557.png)
 
 ## Belegungsplan Kabelbaumseite
 ### 9pin Buchse DJ7091A-2.8-21
-![9pin Buchse DJ7091A-2.8-21](https://github.com/brickpool/Speedometer/images/9pol_DJ7091A-2.8-21.png)
+![9pin Buchse DJ7091A-2.8-21](images/9pol_DJ7091A-2.8-21.png)
 
 1. hellblau - Blinker rechts, (+) geschaltet
 2. blau - Fernlichtkontrolle, (+) geschaltet
@@ -29,14 +29,14 @@ Dass die Tachometer häufiger nicht direkt funktionieren bzw. man sich die wicht
 9. schwarz - Plus (+) geschaltet vom Zündschloss
 
 ### 3pin Buchse DJ7031A-2.8-21
-![3pin Buchse DJ7091A-2.8-21](https://github.com/brickpool/Speedometer/images/3pol_DJ7091A-2.8-21.png)
+![3pin Buchse DJ7091A-2.8-21](images/3pol_DJ7091A-2.8-21.png)
 
 1. rot/weiß - Positiver Anschluss (+) für Wegstreckensensor
 2. grün - Masse Anschluss (-) für Wegstreckensensor
 3. schwarz/weiß - Impulsgeber (Hallsensor) für Wegstrecke
 
 ### 6pin Buchse DJ7061A-2.8-21
-![6pin Buchse DJ7091A-2.8-21](https://github.com/brickpool/Speedometer/images/6pol_DJ7091A-2.8-21.png)
+![6pin Buchse DJ7091A-2.8-21](images/6pol_DJ7091A-2.8-21.png)
 
 1. grün/rot - Leerlaufkontrollanzeige (Neutral), gegen Masse zu schalten
 2. rosa - Ganganzeige 1. Gang, gegen Masse zu schalten
@@ -58,21 +58,21 @@ Lichtkontrollanzeige soll später für Motorkontrollanzeige genutzt werden. Die 
 
 Es wurde folgende Messreiche aufgenommen:
 
-Nr. | Spannung | Strom | Bemerkung
---- | --- | --- | ---
-1 | 3,5V | 0,4mA | Kontrollleuchte glimmt
-2 | 4,9V | 1mA |
-3 | 10V | 3,4mA | unterer Arbeitsbereich vom Instrument laut Datenblatt
-4 | 11,9V | 4,36mA | unterer Schaltpunkt für Batterieanzeige im Instrument
-5 | 12V | 4,4mA |
-6 | 13,8V | 5,27mA | Ladeschlussspannung für 12V Blei-Batterie
-7 | 15V | 5,85mA | oberer Schaltpunkt für Batterieanzeige und oberer Arbeitsbereich
+Nr. | Spannung | Strom (Bemerkung)
+--- | --- | ---
+1 | 3,5V | 0,4mA (Kontrollleuchte glimmt)
+2 | 4,9V | 1mA
+3 | 10V | 3,4mA (unterer Arbeitsbereich vom Instrument laut Datenblatt)
+4 | 11,9V | 4,36mA (unterer Schaltpunkt für Batterieanzeige im Instrument)
+5 | 12V | 4,4mA
+6 | 13,8V | 5,27mA (Ladeschlussspannung für 12V Blei-Batterie)
+7 | 15V | 5,85mA (oberer Schaltpunkt für Batterieanzeige und oberer Arbeitsbereich)
 
-![Lichtkontrollanzeige](https://github.com/brickpool/Speedometer/images/Lichtkontrollanzeige.png)
+![Lichtkontrollanzeige](images/Lichtkontrollanzeige.png)
 
 Der Innenwiderstand RI der Kontrollanzeige beträgt bei 12V ca. 2,7kOhm
 
-![Innenwiderstand](https://github.com/brickpool/Speedometer/images/Innenwiderstand.png)
+![Innenwiderstand](images/Innenwiderstand.png)
 
 Bei der durchgeführten Messung wurde auch der Arbeitsbereich für Batterieanzeige im Instrument ermittelt: 11,9V bis 15V. Die Werte stimmen durchaus mit der Praxis. Eine fast entladene Batterie hat eine Spannung von 11,89V. Das Gasen einer 12V Blei-Batterie beginnt bei 14,4V.
 
@@ -81,8 +81,8 @@ Das Signal für den Drehzahlmesser kommt von Klemme 1 der Zündspule über einen
 ## Quellen und weiterführende Literatur
 
 ### Links
-Cafe Racer Forum; [Kennt ihr dieses Instrument aus ebay...?](http://www.caferacer-forum.de/viewtopic.php?f=43&t=15340&p=234461)
-Banggood.com; [12000RMP LCD Digital Speedometer Odometer Motorcycle 1-4 Cylinders](http://www.banggood.com/en/12000-RMP-LCD-Digital-Speedometer-Odometer-Motorcycle-1-4-Cylinders-p-972677.html)
+- Cafe Racer Forum; [Kennt ihr dieses Instrument aus ebay...?](http://www.caferacer-forum.de/viewtopic.php?f=43&t=15340&p=234461)
+- Banggood.com; [12000RMP LCD Digital Speedometer Odometer Motorcycle 1-4 Cylinders](http://www.banggood.com/en/12000-RMP-LCD-Digital-Speedometer-Odometer-Motorcycle-1-4-Cylinders-p-972677.html)
 
 ### Nächste Seite
-Weiter mit [Lade- und Öldruckkontrollanzeige](kontrollanzeige.html).
+Weiter mit [Lade- und Öldruckkontrollanzeige](pages/kontrollanzeige.html).
