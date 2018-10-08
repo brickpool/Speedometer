@@ -4,7 +4,7 @@ title: Lade- und Öldruckkontrollanzeige mit CMOS
 description: Universal LCD Motorrad Tachometer
 ---
 
-Ziel ist es sowohl die NPN-Schaltstufe hinzu als auch PNP-Schaltstufe durch ein IC zu ersetzen. Zur Anwendung kommt der Baustein CD4093B (Datenblatt: http://www.ti.com/lit/ds/symlink/cd4093bc.pdf), welches vier NAND-Schmitt-Trigger mit je 2 Eingängen zum Einsatz. An den Betriebsspannungsanschlüssen sind bei der CMOS Familie 4000 eine Spannung für VCC (= Betriebsspannung) von +3V bis +18V und für VSS (= Masse) 0V anzulegen.
+Ziel ist es sowohl die NPN-Schaltstufe hinzu als auch PNP-Schaltstufe durch ein IC zu ersetzen. Zur Anwendung kommt der Baustein CD4093B (Datenblatt: [cd4093bc.pdf](www.ti.com/lit/ds/symlink/cd4093bc.pdf)), welches vier NAND-Schmitt-Trigger mit je 2 Eingängen zum Einsatz. An den Betriebsspannungsanschlüssen sind bei der CMOS Familie 4000 eine Spannung für Vcc (= Betriebsspannung) von +3V bis +18V und für Vss (= Masse) 0V anzulegen.
 
 Aufgabe der NPN-Schaltstufe war es das Signal zu invertieren. Die folgende einfacher Schaltung kann die Funktion mittels 4093 abbilden.
 
@@ -49,7 +49,7 @@ In der fertigen Schaltung wird zusätzlich noch ein Stützkondensator C6 von 100
 ### Links
 - Elektronik-Kompendium; [Pullup-, Pulldown-Widerstand , Maßnahmen zur Entstörung bei langer Leitung, Openkollektor - Wired-OR - Latchup-Risiken](http://www.elektronik-kompendium.de/public/schaerer/pullr.htm)
 - Elektronik-Kompendium; [Überspannungsschutz von empfindlichen Verstärkereingängen](http://www.elektronik-kompendium.de/public/schaerer/ovprot.htm)
-- (Das CMOS Kochbuch)[https://www.amazon.de/Das-CMOS-Kochbuch-Don-Lancaster/dp/3883220027] von Don Lancaster; ISBN 3-88322-002-7
+- [Das CMOS Kochbuch](https://www.amazon.de/Das-CMOS-Kochbuch-Don-Lancaster/dp/3883220027) von Don Lancaster; ISBN 3-88322-002-7
 
 ### Nächste Seite
 Weiter geht's mit [Zündsignalwandler](zuendsignalwandler_1.html).
