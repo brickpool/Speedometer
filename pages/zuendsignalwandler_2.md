@@ -74,7 +74,7 @@ In der fertigen Schaltung wird zusätzlich noch ein Stützkondensator C8 von 100
 ## Quellen und weiterführende Literatur
 
 ### Links
-- (Das CMOS Kochbuch)[https://www.amazon.de/Das-CMOS-Kochbuch-Don-Lancaster/dp/3883220027] von Don Lancaster; ISBN 3-88322-002-7
+- Electrical Engineering and Computer Science; [Phase-Locked Loops](https://people.eecs.ku.edu/~callen58/501/PLL_Notes_(Proj3).pdf)
 - Elektronik-Kompendium; [Das MonoFlipflop und eine praktische Anwendung](https://www.elektronik-kompendium.de/public/schaerer/monoff.htm)
 - Elektronik-Kompendium; [PLL-Frequenzsynthese: Spezielles Problem mit dem CD4046B](http://www.elektronik-kompendium.de/public/schaerer/pll4046.htm)
 - Elektronik-Kompendium; [Ein spannungsgesteuerter Oszillator (VCO) mit dem CD4046B](http://www.elektronik-kompendium.de/public/schaerer/vco.htm)
