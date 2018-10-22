@@ -58,17 +58,17 @@ Das Kombiinstrument nutzt zur Messung des Widerstands eine Konstantstromquelle, 
 
 Es wurde folgende Messreihe aufgenommen:
 
-Balken | U[mV] | I [mA] | R [kOhm]
+Balken | Spannung  | Strom  | Widerstandswert
 --- | --- | --- | ---
-8 | 151 | 16,8 | 9,0
-7 | 216 | 13,5 | 16,0
-6 | 395 | 13,9 | 28,5
-5 | 571 | 13,7 | 41,6
-4 | 714 | 13,5 | 52,7
-3 | 865 | 14,0 | 62,0
-2 | 998 | 13,5 | 73,9
-1 | 1121 | 13,1 | 85,9
-Anzeige blinkt | 1205 | 12,8 | 94,3
+8 | 151 mV | 16,8 mA | 9 Ohm
+7 | 216 mV | 13,5 mA | 16 Ohm
+6 | 395 mV | 13,9 mA | 28,5 Ohm
+5 | 571 mV | 13,7 mA | 41,6 Ohm
+4 | 714 mV | 13,5 mA | 52,7 Ohm
+3 | 865 mV | 14 mA | 62 Ohm
+2 | 998 mV | 13,5 mA | 73,9 Ohm
+1 | 1121 mV | 13,1 mA | 85,9 Ohm
+Anzeige blinkt | 1205 mV | 12,8 mA | 94,3 Ohm
 
 ![Benzinstandsanzeige](images/Benzinstandsanzeige.png)
 
@@ -82,13 +82,13 @@ Es wurde folgende Messreihe aufgenommen:
 
 Nr. | Spannung | Strom (Bemerkung)
 --- | --- | ---
-1 | 3,5V | 0,4mA (Kontrollleuchte glimmt)
-2 | 4,9V | 1mA
-3 | 10V | 3,4mA (unterer Arbeitsbereich vom Instrument laut Datenblatt)
-4 | 11,9V | 4,36mA (unterer Schaltpunkt für Batterieanzeige im Instrument)
-5 | 12V | 4,4mA
-6 | 13,8V | 5,27mA (Ladeschlussspannung für 12V Blei-Batterie)
-7 | 15V | 5,85mA (oberer Schaltpunkt für Batterieanzeige und oberer Arbeitsbereich)
+1 | 3,5 V | 0,4 mA (Kontrollleuchte glimmt)
+2 | 4,9 V | 1 mA
+3 | 10 V | 3,4 mA (unterer Arbeitsbereich vom Instrument laut Datenblatt)
+4 | 11,9 V | 4,36 mA (unterer Schaltpunkt für Batterieanzeige im Instrument)
+5 | 12 V | 4,4 mA
+6 | 13,8 V | 5,27 mA (Ladeschlussspannung für 12V Blei-Batterie)
+7 | 15 V | 5,85 mA (oberer Schaltpunkt für Batterieanzeige und oberer Arbeitsbereich)
 
 ![Lichtkontrollanzeige](images/Lichtkontrollanzeige.png)
 
