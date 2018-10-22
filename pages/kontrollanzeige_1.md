@@ -4,13 +4,13 @@ title: Lade- und Öldruckkontrollanzeige
 description: Universal LCD Motorrad Tachometer
 ---
 
-Die Guzzi hat eine Ladekontrollleuchte die im Original zwischen Anschluss Kl.61 vom Gleichrichter und der positiven Versorgungsspannung (12V) vom Instrument liegt. Es kann zwar nicht der Ladezustand oder die aktuelle Spannung geprüft werden, aber es gibt zumindest eine Anzeige, dass die Batterie bei laufenden Motor geladen wird.
+Die Guzzi sowie die Ducati Monster hat eine Ladekontrollleuchte, die im Original zwischen Anschluss Kl.61 vom Gleichrichter und der positiven Versorgungsspannung (12V) vom Instrument liegt. Es kann zwar nicht der Ladezustand oder die aktuelle Spannung geprüft werden, aber es gibt zumindest eine Anzeige, dass die Batterie bei laufenden Motor geladen wird.
 
 Da sowohl der Regler und Gleichrichter sowie das Instrument ausgetauscht werden, ist eine Anpassung der Funktion Ladekontrollleuchte notwendig. Das China-Instrument bietet leider keine eigene Ladekontrollleute. Da die Tachobeleuchtung als Kontrolle ob Licht eingeschaltet ist ausreicht, wird zukünftig die Lichtkontrollleuchte als Anzeige genommen.
 
 Die Kontrollleuchte soll immer zur Anzeige kommen, wenn mehr Strom der Batterie entnommen wird als hinein fließt. Hierzu wird der Schaltpunkt für die Anzeige einfach über die Ladeschlussspannung definiert. Bei einer 12V Blei-Batterie beträgt die Ladeschlussspannung bei Schonladung 13,8V. Der Generatorspannung muss aber mindestens 13,4V liefern, damit mindestens eine Erhaltungsladung stattfindet. Eine vollgeladene Batterie sollte 12,8 V haben, bei ca. 12,4V ist Sie Normal geladen, bei ca. 12,2V Schwach geladen, bei ca. 11,9 V Normal entladen und bei Werten unterhalb von 10,7 V Tief entladen.
 
-Die Guzzi bieten darüber hinaus eine Öldruckanzeige. Der zugehörige Sensor wird bei Problemen gegen Masse geschaltet und bringt im Original im Instrumente eine Lampe zur Anzeige, die an die Versorgungsspannung angeschlossen ist.
+Die Guzzi bzw. Ducati besitzt darüber hinaus eine Öldruckanzeige. Der zugehörige Sensor wird bei Problemen gegen Masse geschaltet und bringt im Original im Instrument eine Lampe zur Anzeige, die an die Versorgungsspannung angeschlossen ist.
 
 Die folgende Beispielschaltung soll an einem Fahrzeug mit 12V-Netz eine Kontrollleuchte im Instrument ansteuern. Die Kontrollleuchte La1 wird ab einer Spannung von unter 13,8V an Kl.61 eingeschaltet. Zudem schaltet der Schalter S1 (geschaltet gegen Masse) ebenfalls die Kontrollleuchte.
 
@@ -42,7 +42,7 @@ Bei einer Versorgungsspannung von 10-15V und einem Widerstand R3 von ca. 4,7kOhm
 ## Schalten der Versorgungsspannung
 Die Kontrollleuchte ist im Instrument gegen Masse geschaltet. Sie erfordert also das schalten Versorgungsspannung. Da dies weiterhin elektronisch passieren soll, nutzen wir hierzu ein PNP-Transistor. Hier liegt der Emitter an der Versorgungsspannung vom Fahrzeug (Kl. 30).
 
-Zur Anwendung kommt ein Transistor Typ BC557B (Datenblatt: [BC560.pdf](https://www.fairchildsemi.com/ds/BC/BC560.pdf)) der die Kontrollleuchte La1 bei 12V mit einer gemessenen Last von 2,7kOhm schalten soll.
+Zur Anwendung kommt ein Transistor Typ BC557B (Datenblatt: [BC560.pdf](https://www.fairchildsemi.com/ds/BC/BC560.pdf)) der die Kontrollleuchte La1 bei 12V mit einer gemessenen Last von 2,7kOhm schalten soll. Vorteil eines Transistors gegenüber ein MOSFET ist, dass bei hoher Last (sprich kleinem Lastwiderstand) der Spannungsabfall am Transistor bei _Durchschaltung_ nur ca. 100mV beträgt. 
 
 ![Schalten der Versorgungsspannung Abb. 1](../images/Schalten_der_Versorgungsspannung_1.png)
 
@@ -62,7 +62,7 @@ Der höchst zulässige Kollektorstrom IC für den Transistortyp beträgt max. 10
 
 Für unseren Anwendungsfall verwenden wir für R7 ein Widerstand von 10kOhm der einen Basisstrom von ca. 0,9 bei 10V bis 1,4 mA bei 15V hervorruft.
 
-Damit die Transistorstufe zuverlässig arbeitet, kommt zusätzlich der Widerstand R6 zu Anwendung. Er vermeidet, dass der Transistor bei Störeinstrahlungen teilweise leitet indem er den Basisanschluss auf die Versorgungsspannung vorspannt, so dass der Transistor sperrt. Erst mit Schalten von VIN gegen Masse wird die Spannung herabgesetzt, so dass der Transistor leitet. Der dabei fließende Querstrom IQ soll ca. 3- bis 10-mal höher als der Basisstrom IB sein. Dabei gilt, je grösser dieses der Querstrom ist, umso schärfer ist der Knick vom sperrenden zum leitenden bzw. gesättigten Transistor.
+Damit die Transistorstufe zuverlässig arbeitet, kommt zusätzlich der Widerstand R6 zu Anwendung. Er vermeidet, dass der Transistor bei Störeinstrahlungen teilweise leitet, indem er den Basisanschluss auf die Versorgungsspannung vorspannt, so dass der Transistor sperrt. Erst mit Schalten von Vin gegen Masse wird die Spannung herabgesetzt, so dass der Transistor leitet. Der dabei fließende Querstrom Iq soll ca. 3- bis 10-mal höher als der Basisstrom IB sein. Dabei gilt, je grösser der Querstrom ist, umso schärfer ist der Knick vom sperrenden zum leitenden bzw. gesättigten Transistor.
 
     R6(max) = (Vbat(min) - Vin(min)) / Iq(min) = 10V - 90mV / (Ib(min) * 3) = 9,9V / (0,9mA * 3) = 3,5k
     R6(min) = (Vbat(max) - Vin(min)) / Iq(max) = 15V - 90mV / (Ib(max) * 10) = 14,9V / (1,4mA * 10) = 1,1k

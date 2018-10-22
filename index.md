@@ -52,11 +52,33 @@ Dass die Tachometer häufiger nicht direkt funktionieren bzw. man sich die wicht
 
 An die Tankanzeige kann auf einen Sensor für 100 Ohm oder 500 Ohm angeschlossen werden. Im Instrument ist per Programmierung der Messsensor für 100 Ohm voreingestellt. Laut Datenblatt erfolgt der Bereich für die 100 Ohm Anzeige zwischen 98 Ohm (Leer) und 8 Ohm (Voll). Das Instrument erwartet eine Anschaltung gegen Masse. Eine Abschaltung der Tankanzeige ist nicht vorgesehen.
 
-Messungen haben ergeben, dass ein offener Anschluss und alle Werte kleiner 10 Ohm und größer 90 Ohm zu einem Blinken der Anzeige führen. Obwohl keine Tankanzeige benötigt, muss der Anschluss für die Tankanzeige passend beschaltet werden, da sonst eine blinkende Tankanzeige am Instrument stört. Die einfachste Methode ist es, dass Instrument auf einen Sensor von 500 Ohm umzuprogrammieren und mittels 470 Ohm Widerstand den Anschluss für die Tankanzeige gegen Masse zu schalten.
+Messungen haben ergeben, dass ein offener Anschluss und alle Werte größer 90 Ohm zu einem Blinken der Anzeige führen. Auch wenn keine Tankanzeige benötigt wird, muss der Anschluss für die Tankanzeige passend beschaltet werden, da sonst eine blinkende Tankanzeige am Instrument stört. 
 
-Lichtkontrollanzeige soll später für Motorkontrollanzeige genutzt werden. Die Lichtkontrollanzeige wird gegen Plus geschaltet, um sie zur Anzeige zur bringen. Messungen an der Lichtkontrollanzeige zeigen, dass die Lampe bereits bei einer Anschaltung von 3,5V zu glimmen beginnt. Hierzu muss das Instrument nicht eingeschaltet sein. Ab ca. 5V leuchtet die Kontrollleuchte gut sichtbar.
+Das Kombiinstrument nutzt zur Messung des Widerstands eine Konstantstromquelle, welche einen konstanten elektrischen Strom von ca. 13mA in den Stromkreis einspeist. Für die Aussteuerung der Balkenanzeige nutzt das Instrument die elektrischen Spannung an ihren Anschlusspunkten.
 
-Es wurde folgende Messreiche aufgenommen:
+Es wurde folgende Messreihe aufgenommen:
+
+Balken | U[mV] | I [mA] | R [kOhm]
+--- | --- | --- | ---
+8 | 151 | 16,8 | 9,0
+7 | 216 | 13,5 | 16,0
+6 | 395 | 13,9 | 28,5
+5 | 571 | 13,7 | 41,6
+4 | 714 | 13,5 | 52,7
+3 | 865 | 14,0 | 62,0
+2 | 998 | 13,5 | 73,9
+1 | 1121 | 13,1 | 85,9
+Anzeige blinkt | 1205 | 12,8 | 94,3
+
+![Benzinstandsanzeige](images/Benzinstandsanzeige.png)
+
+Die Leerlaufspannung der Konstantstromquelle beträgt ca. 5 Volt.
+
+![Tankwiderstandswerte](images/Tankwiderstandswerte.png)
+
+Lichtkontrollanzeige soll später als Motorkontrollanzeige genutzt werden. Die Lichtkontrollanzeige wird gegen Plus geschaltet, um sie zur Anzeige zur bringen. Messungen an der Lichtkontrollanzeige zeigen, dass die Lampe bereits bei einer Anschaltung von 3,5V zu glimmen beginnt. Hierzu muss das Instrument nicht eingeschaltet sein. Ab ca. 5V leuchtet die Kontrollleuchte gut sichtbar.
+
+Es wurde folgende Messreihe aufgenommen:
 
 Nr. | Spannung | Strom (Bemerkung)
 --- | --- | ---

@@ -4,7 +4,7 @@ title: Zündsignalwandler Teil 2
 description: Universal LCD Motorrad Tachometer
 ---
 
-Die Anschaltung für das Herabsetzen der Zündimpulse wird 1:1 übernommen. Die Anschaltung erfolgt in Analogie an Eingang 3.1.
+Die Anschaltung für das Herabsetzen der Zündimpulse wird 1:1 übernommen. Die Anschaltung erfolgt in Analogie an den Transistor T42 von der Geberplatine.
 
 Die Aufbereitung der Zündimpulse soll nicht in diskreter Bauweise sondern mittels CMOS-IC erfolgen. Hierzu eignet sich ein getaktetes D-Flipflop (4013) oder JK-Flipflop (4027), welches als Monostabile Kippstufe genutzt wird. Der CMOS 4027 enthält zwei getrennte JK-Flipflops (Datenblatt: [cd4027b.pdf](http://www.ti.com/lit/ds/symlink/cd4027b.pdf)). Aufgrund einer späteren weiteren Verwendung des gleichen Bausteins für einen Binärzähler mit einem Teilerfaktor von Eins, wird dieser anstatt eines Timer-ICs 555 verwendet.
 
@@ -43,7 +43,7 @@ Zum vollständigen Verständnis wird auf folgende Quellen "Theorie und Anwendung
 
 ![Frequenzdopplung Abb. 2](../images/Frequenzdopplung_2.png)
 
-Die Impulsfolge wird auf den (ersten) Eingang vom Komperator 2 (Pin 14) des 4046 gelegt. Vorteil, sofern kein Signal am Eingang anliegt, wird die Minimal-Frequenz fmin am Ausgang ausgegeben. Die Minimal-Frequenz f(min) wird über den nicht eingesetzten Widerstand an Pin 12 (offen = unendlich) bestimmt und beträgt 0 Hz.
+Die Impulsfolge wird auf den (ersten) Eingang vom Komperator 2 (Pin 14) des 4046 gelegt. Vorteil, sofern kein Signal am Eingang anliegt, wird die Minimal-Frequenz f(min) am Ausgang ausgegeben. Die Minimal-Frequenz f(min) wird über den nicht eingesetzten Widerstand an Pin 12 (offen = unendlich) bestimmt und beträgt 0 Hz.
 
 Der Komperator-Ausgang (Pin 13) wird über einen Schleifen-Filter (Loop-Lowpass-Filter), bestehend aus Widerstand R18, R19 und C31, mit dem VCO-Eingang vom Pin 9 verbunden.
 

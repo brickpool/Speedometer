@@ -52,4 +52,4 @@ In der fertigen Schaltung wird zusätzlich noch ein Stützkondensator C6 von 100
 - [Das CMOS Kochbuch](https://www.amazon.de/Das-CMOS-Kochbuch-Don-Lancaster/dp/3883220027) von Don Lancaster; ISBN 3-88322-002-7
 
 ### Nächste Seite
-Weiter geht's mit [Zündsignalwandler](zuendsignalwandler_1.html).
+Weiter geht's mit [Bezinstandsanzeige Ducati](benzinstandsanzeige.html).
