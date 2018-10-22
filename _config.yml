@@ -10,7 +10,7 @@ future: true
 
 # Set the time zone for site generation. This sets the TZ environment variable,
 # which Ruby uses to handle time and date creation and manipulation. 
-timezone: DE
+timezone: Europe/Berlin
 
 # Themes are encouraged to use these universal variables
 # so be sure to set them if your theme uses them.
