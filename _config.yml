@@ -5,6 +5,13 @@ permalink: /:categories/:year/:month/:day/:title
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "CHANGELOG.md", "LICENSE"]
 highlighter: rouge
 
+# Publish posts or collection documents with a future date
+future: true
+
+# Set the time zone for site generation. This sets the TZ environment variable,
+# which Ruby uses to handle time and date creation and manipulation. 
+timezone: DE
+
 # Themes are encouraged to use these universal variables
 # so be sure to set them if your theme uses them.
 #
