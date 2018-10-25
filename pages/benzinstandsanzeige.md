@@ -22,7 +22,7 @@ leer | 78mA | 2,2V | 10,4V (Kontrollleuchte an)
 ## Quellen und weiterführende Literatur
 
 ### Links
-- Wikipedia; [Heißleiter](https://de.wikipedia.org/wiki/Heissleiter)
+- Wikipedia; [Heißleiter](https://de.wikipedia.org/wiki/Hei%C3%9Fleiter)
 - Wikipedia; [Elektrische Eigenschaften einer Glühlampe](https://de.wikipedia.org/wiki/Gl%C3%BChlampe#Elektrische_Eigenschaften)
 - Duc-Forum.de; [Tankkontrollleuchte LED für alte SS/Monster funzt](http://www.duc-forum.de/thread.php?threadid=71131)
 

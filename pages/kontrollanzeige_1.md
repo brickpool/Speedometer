@@ -24,7 +24,7 @@ Der Spannungsteiler aus R1 und R2 lässt sich mit folgender Formel bestimmen.
 
     V0 = (1+(R1/R2))*Vref
 
-Durch die eng tolerierte Referenzspannung VREF von typischerweise 2,495V (siehe Datenblatt) und den schwachen Eingangsstrom an Vref (Iref) von 2 bis 4 μA (siehe Datenblatt) lässt sich der Spannungsteiler ziemlich genau berechnen. Mit den Normwerten 6,8k und 1,5k schaltet der TL431 bei V0 = 13,8V zwischen Katode und Anode durch.
+Durch die eng tolerierte Referenzspannung Vref von typischerweise 2,495V (siehe Datenblatt) und den schwachen Eingangsstrom an Vref (Iref) von 2 bis 4 μA (siehe Datenblatt) lässt sich der Spannungsteiler ziemlich genau berechnen. Mit den Normwerten 6,8k und 1,5k schaltet der TL431 bei V0 = 13,8V zwischen Katode und Anode durch.
 
 ![Messen der Spannung an Kl.61 Abb. 1](../images/Messung_Spannung_Kl.61_1.png)
 

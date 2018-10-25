@@ -1,54 +1,53 @@
 ---
 layout: page
-title: Lade- und Öldruckkontrollanzeige mit CMOS
+title: Lade- und Öldruckkontrollanzeige mit Single-Chip-Anschaltung
 description: Universal LCD Motorrad Tachometer
 ---
 
-Ziel ist es sowohl die NPN-Schaltstufe hinzu als auch PNP-Schaltstufe durch ein IC zu ersetzen. Zur Anwendung kommt der Baustein CD4093B (Datenblatt: [cd4093bc.pdf](http://www.ti.com/lit/ds/symlink/cd4093bc.pdf)), welches vier NAND-Schmitt-Trigger mit je 2 Eingängen zum Einsatz. An den Betriebsspannungsanschlüssen sind bei der CMOS Familie 4000 eine Spannung für Vcc (= Betriebsspannung) von +3V bis +18V und für Vss (= Masse) 0V anzulegen.
+Die diskret aufgebaute Lade- und Öldruckkontrollanzeige kann auch mit einem einzelnen NE555 und einem halben Dutzend passiver Komponenten realsiert werden. Aufgabe der Diskreten Schaltung ist es, das Generatorsignal zu überwachen und bei Unterspannung die positiv Betriebsanschluss zu schaltend. Zusätzlich ist der Öldruckschalter mit eingebracht.
 
-Aufgabe der NPN-Schaltstufe war es das Signal zu invertieren. Die folgende einfacher Schaltung kann die Funktion mittels 4093 abbilden.
+## Ladekontrollanzeige
+Der allgegenwärtige NE555 _Timer_-Baustein ist ein sehr vielseitiger Chip. Es enthält zwei Spannungsvergleicher mit einer internen Referenz, eine RS-FlipFlop und ein _totem-pole_ Ausgangskreis, der je nach Ausführung bis zu 200 mA liefern bzw. aufnehmen kann. Alle diese Teile werden für die Ladekontrollanzeige verwendet.
 
-![Kontrollanzeige in CMOS Abb.1](../images/Kontrollanzeige_in_CMOS_1.png)
+Grundsätzlich funktionieren die drei für die Ladekontrollanzeige verwendeten Eingänge _Trigger_, _Treshold_ und _Control Voltage_ wie folgt:
+- Wenn die Spannung am _Trigger_-Pin weniger als die Hälfte der Referenzspannung vom _Control Voltage_-Pin des IC's beträgt, wird das interne RS-FlipFlop gesetzt und der Ausgang _Output_ geht auf _High_ (fast bis Vcc).
+- Wenn die Spannung am _Treshold_-Pin mehr als die Referenzspannung vom _Control Voltage_-Pin beträgt, wird das interne RS-FlipFlop zurückgesetzt und der Ausgang geht in den _Low_-Zustand (geerdet an die negative Versorgungsleitung).
 
-Die folgenden einfachen Methoden, sollen den CMOS-Eingang der Schaltstufe unempfindlich gegenüber Störsignalen machen.
+Mit einer geeigneten Referenzspannung und zwei Spannungsteilern, kann die Funktion der Ladekontrollanzeige inkl. Hysterese erfüllt werden. 
 
-![Kontrollanzeige in CMOS Abb.2](../images/Kontrollanzeige_in_CMOS_2.png)
+![Kontrollanzeige NE555 Abb.1](../images/Kontrollanzeige_mit_555_1.png)
 
-Die beiden Widerstände R3 und R4 fungieren aus Sicht vom CMOS-Eingang zusammen als Pullup-Widerstand, der den Spannung-Pegel hinaufzieht bis zum Betriebsspannung. Betreffs der Größe vom Widerstand kommt es ganz auf die Anwendung an. In der Praxis eignen sich gut Werte von 10k bis einigen 100k. Hier beträgt der Wert 37,7k, summiert aus R3 mit 4,7k (geringer Wert, damit ein minimaler Strom IKA von > 1mA durch den TL431 fließt) und R4 mit 33k.
+Ein am Gleichrichter Klemme 61 bzw. D+ angeschlossener Spannungsteiler wird so ausgelegt und an Pin _Trigger_ angeschlossen, dass die Spannung an _Trigger_ gleich die Hälfte von der Referenzspannung von _Control Voltage_ ist. Dies ist der gewünschte Unterspannungsschaltpunkt. Wenn die Spannung an Klemme 61 unter diesen Sollwert sinkt, geht die Spannung am Ausgang _Output_ auf _High_.
 
-Der Einsatz des Kondensator C4 schafft Abhilfe gegen mittel- und niederfrequente Störungen bzw. schnellen Wechseln des TL431-ICs Schaltzustandes. Beim Wechsel vom leitenden Zustand (Low) in den sperrenden Zustand (High) wirkt die Zeitkonstante (R3+R4)*C4 mit ca. 3,8ms. Beim umgekehrten Wechsel von High nach Low erzeugt R4 mit C4 eine Zeitkonstante von 3,3ms. Bei diesen Werten können kleine Signaländerungen kaum stören und hochfrequente Störsignale haben ebenfalls keine Chance, da C4 ein Keramikkondensator ist.
+Ein zweiter Spannungsteiler wird an _Treshold_ angeschlossen. Er ist so eingestellt, dass die Spannung an _Treshold_ gleich der Spannung von _Control Voltage_ist, wenn die Batteriespannung auf dem gewünschten Sollwert ist. Wenn die Spannung an Klemme 61 diesen Sollwert überschreitet, geht die Spannung an Pin  _Output_ auf _Low_.
 
-Durch diese Maßnahme ist die Flankensteilheit beim Umschalten vom TL431 sehr niedrig. Dies kann, wenn der CMOS-Eingang keine Schmitt-Trigger-Funktion aufweist, während des Schaltvorganges zu kurzzeitigen unkontrollierten Schwingungen am Ausgang des NAND führen. Daher kommt ein NAND-Baustein
-mit Schmitt-Trigger-Funktion zum Einsatz.
+Der Pin _Control Voltage_ benötigt eine stabile Spannung, um die korrekten Umschaltpunkte für die zwei interen Komparatoren, welche zusätzlich mit den Pins _Trigger_ und _Treshold_ verbunden sind, zu erhalten. Eine 6,2V Zenerdiode (0,5W) zusammen mit einem Vorwiderstand ist eine einfache und genügend genaue Spannungsreferenz. Der Vorwiderstand ist mit 1k so gewählt, dass die Zener-Spannung auch noch bei 10V Eingangsspannung oder darunter gehalten wird.
 
-Bezogen auf den Arbeitsbereich von 10V bis 15V, ändert sich Aufgrund der Schmitt-Trigger-Funktion vom 4093, bei einer in positiver Richtung ansteigenden Eingangsspannung und einer Betriebsspannung von 10V der Ausgang bei 5,9V und bei einer Betriebsspannung von 15V mit 8,8V. Bei der abfallenden Flanke der Eingangsspannung ändert sich der Ausgang dagegen erst bei 3,9V (Betriebsspannung 10V) bzw. 5,8V (Betriebsspannung 15V). D.h. die Hysterese beträgt bei einer 10V-Betriebsspannung 2V und bei einer 15V-Betriebsspannung 3V.
+![Kontrollanzeige NE555 Abb.2](../images/Kontrollanzeige_mit_555_2.png)
 
-Aufgabe der PNP-Schaltstufe war es, die Versorgungsspannung zu schalten. Zentrale Frage ist, ob der Ausgangsstrom des CMOS NAND-Gatters ausreicht um den Kontrollanzeige zum Leuchten zu bringen? Das Datenblatt verrät dass der maximale Ausgangstrom von der CMOS Familie 4000 bei einer Betriebsspannung von 10V typischerweise 2,6 mA und bei 15V typ. 6,8 mA. Sollte der Ausgang sogar gegen Masse oder die Betriebsspannung kurzgeschlossen sein, fließt der oben genannte Strom aus bzw. in den Ausgangspin und die Spannung bricht zusammen.
+Die Widerstände R1, R2 und R3, R4 bilden die beiden Spannungsteiler. Betreffs der Größe vom Widerstand kommt es ganz auf die Anwendung an. In der Praxis eignen sich gut Werte von 10k bis einigen 100k. Der Wert von R1 beträgt 68k und der Wert von R2 beträgt 24k für den Umschaltpunkt der Unterspannung. Der Widerstand R3 ist mit 39k und R4 mit 33k festgelegt, um den Umschalztpunkt für die Sollspannung festzulegen.
 
-Wenn man mehrere Gatter parallel schaltet (Ein- und Ausgänge) steht jedoch ein größerer maximaler Ausgangstrom zur Verfügung. Auch wenn dies der _reinen Lehre_ widerspricht, die Praxis zeigt, dass es sehr viele Schaltungen gibt, bei denen Gatter parallelgeschaltet werden, um die Treiberleistung zu erhöhen. Die parallelgeschalteten Gatter müssen sich aber zwingend in einem gemeinsamen Schaltkreis befinden, um gleiche Anstiegs- und Abfall- und Durchlaufzeiten zu garantieren.
+Der Einsatz des Kondensator C5 schafft Abhilfe gegen Störungen beim Wechsel vom Zustand _High_ in den Zustand _Low_. Aufgabe der PNP-Schaltstufe war es, die Versorgungsspannung zu schalten. Der Ausgangsstrom des CMOS 556-Bausteins reicht ausreicht, um den Kontrollanzeige zum Leuchten zu bringen. Das Datenblatt verrät dass der maximale Ausgangstrom 100 mA betragen darf. Sollte der Ausgang sogar gegen Masse oder die Betriebsspannung kurzgeschlossen sein, fließt der eben genannte Strom aus bzw. in den Ausgangspin und die Spannung bricht zusammen.
 
-![Kontrollanzeige in CMOS Abb.3](../images/Kontrollanzeige_in_CMOS_3.png)
+## Öldruckkontrollanzeige
+Die Kontrollanzeige La1 soll wie bisher bei Verlust des Öldrucks ebenfalls zur Anzeige kommen. Die Anschaltung des Sensors (Schalten der Masse bei Öldruckverlust) erfolgt einfach an den _Trigger_ Eingang vom _Timer_-Baustein. Was fehlt ist eine passende Beschaltung, um unempfindlich gegen Störspannung zu sein. Und obwohl der _Timer_-Baustein eine Eingangsschutzschaltung besitzt, soll zusätzlich ein _Überspannungsschutz_ eingebaut werden. 
 
-Die Kontrollanzeige La1 soll wie bisher bei Verlust des Öldrucks ebenfalls zur Anzeige kommen. Die Integration des Sensors erfolgt einfach an dem Eingang vom NAND. Was fehlt ist eine passende Beschaltung, um unempfindlich gegen Störspannung zu sein. Und obwohl die CMOS Familie 4000 eine Eingangsschutzschaltung besitzt, soll zusätzlich ein Überspannungsschutz eingebaut werden.
+![Kontrollanzeige NE555 Abb.3](../images/Kontrollanzeige_mit_555_3.png)
 
-![Kontrollanzeige in CMOS Abb.4](../images/Kontrollanzeige_in_CMOS_4.png)
+Zur Anwendung kommt der CMOS Timer-Baustein TLC556 (Datenblatt: [tlc556m.pdf](http://www.ti.com/lit/gpn/tlc556m)), welcher zwei RC-Timer mit gemeinsamer Spannungsvorsorgung hat. An den Betriebsspannungsanschlüssen darf eine Spannung für Vcc (= Betriebsspannung) von +2V bis +18V und für Vss (= Masse) 0V angelegt werden.
 
-Der Widerstand R6 dient als Pullup-Widerstand. Wie oben, dient er bei hochohmigen Eingang zusammen mit C5 der Entstörung von mittel- und niederfrequente Einkopplungen Störungen., denn wir dürfen nicht vergessen, dass die Leitung vom Schalter S1 bis zur Schaltung eine gewisse Induktivität besitzt, sprich sie funktioniert wie eine Antenne. Bei offenen Kontakt wirkt die Zeitkonstante R6*C5 mit 10ms. Bei geschlossenem Schalterkontakt ist der Eingang zwar niederohmig,
-aber um Problemen vorbeugen, wird ein Widerstand R5 mit einem Wert von 10k zwischen Schalter und Eingang geschaltet. R5 erzeugt mit C5 eine Zeitkonstante von 1ms. Dies reicht aus, damit auch bei geschlossenem Kontakt eine niedrige Impedanz vorliegt.
-
-Die Eingänge der CMOS-4000-Familie enthalten bereits integrierte Widerstands-Dioden-Netzwerke, die jedoch möglichst nicht überstrapaziert werden sollen. Die zusätzlichen Schutzdioden D5 und D6 verhindern positive und negative Überspannungsimpulse. Wichtig ist, dass man relativ schnelle Dioden verwendet. Eine träge Gleichrichterdiode (z.B. 1N4003) passt nicht, daher kommt eine Kleinsignaldioden vom Typ 1N4148 zum Einsatz.
-
+## Lade-/Öldruckkontrollanzeige
 Die gesamte Schaltung für die Kontrollanzeige sieht wie folgt aus:
 
-![Kontrollanzeige (CMOS)](../images/Kontrollanzeige_CMOS.png)
+![Kontrollanzeige (CMOS TLC556)](../images/Kontrollanzeige_556.png)
 
-In der fertigen Schaltung wird zusätzlich noch ein Stützkondensator C6 von 100nF direkt am 4093 zwischen Speisespannung und Masse eingesetzt.
+In der fertigen Schaltung wird zusätzlich noch ein Stützkondensator C8 von 100nF direkt am TLC556 zwischen Speisespannung und Masse eingesetzt.
 
 ## Quellen und weiterführende Literatur
 
 ### Links
-- Elektronik-Kompendium; [Pullup-, Pulldown-Widerstand , Maßnahmen zur Entstörung bei langer Leitung, Openkollektor - Wired-OR - Latchup-Risiken](http://www.elektronik-kompendium.de/public/schaerer/pullr.htm)
-- Elektronik-Kompendium; [Überspannungsschutz von empfindlichen Verstärkereingängen](http://www.elektronik-kompendium.de/public/schaerer/ovprot.htm)
+- Elektronik-Kompendium; [Timer NE555 und NE556](https://www.elektronik-kompendium.de/sites/bau/0206115.htm)
+- Burton Lang; [NE555 Low Voltage Battery Disconnect Circuit](http://www.gorum.ca/lvdisc.html)
 - [Das CMOS Kochbuch](https://www.amazon.de/Das-CMOS-Kochbuch-Don-Lancaster/dp/3883220027) von Don Lancaster; ISBN 3-88322-002-7
 
 ### Nächste Seite
