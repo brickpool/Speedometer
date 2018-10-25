@@ -118,4 +118,4 @@ Die Differenz zur Schaltschwelle der Messstufe (bei _Low_ definiert über Vka = 
 - Elektronik-Kompendium; [Schalten und Steuern mit Transistoren I](http://www.elektronik-kompendium.de/public/schaerer/powsw1.htm)
 
 ### Nächste Seite
-Weiter geht's mit [Lade- und Öldruckkontrollanzeige mit CMOS](kontrollanzeige_2.html).
+Weiter geht's mit [Lade- und Öldruckkontrollanzeige mit Single-Chip-Anschaltung](kontrollanzeige_2.html).
