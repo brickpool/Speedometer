@@ -71,13 +71,15 @@ In unserem im Anwendungsfall verwenden wir für R6 ein Widerstand von 3,3kOhm.
 
 ![Schalten der Versorgungsspannung Abb. 2](../images/Schalten_der_Versorgungsspannung_2.png)
 
-Da die Anschaltung von La1 erfolgt extern. Damit der PNP-Transistor bei einer Fehlbeschaltung vom Kollektor nicht zerstört wird ein Schutzwiderstand eingebracht. Der Widerstand R8 soll bei einem _Kurzschluss_ von La1 den maximalen Kollektorstrom Ic(max) begrenzen. Dieser beträgt laut Datenblatt 100mA. Die zugehörige Kollektor-Emitter-Spannung Vce wird mit 90mV angesetzt. Der Mindestwiderstand R8 lässt sich folgt berechnen:
+Da die Anschaltung von La1 erfolgt extern und der PNP-Transistor bei einer Fehlbeschaltung vom Kollektor nicht zerstört wird, wird eine Strombegrenzung eingebracht. Der Widerstand R8 soll bei einem _Kurzschluss_ von La1 den maximalen Kollektorstrom Ic(max) begrenzen. Dieser beträgt laut Datenblatt 100mA. 
 
-    R8(min) = (Vbat(max) - Vce(sat)) / Ic(max) = 15V – 90mV / 100mA = 141Ohm
+Z-Diode und R7 bilden an der Basis von T2 eine konstante Spannung von Vz = 3,3V. Die zugehörige Basis-Emitter-Spannung Vbe von T2 wird mit 0,9V angesetzt. Der maximale Strom wird erreicht, wenn der Spannungsabfall an R8 den Wert von Vz - Vbe erreicht. Der Mindestwiderstand R8 für einen vorgebenen maximalen Strom von 20mA, lässt sich wie folgt berechnen:
 
-R8 sollte nicht zu groß gewählt sein, um den Spannungsabfall an R8 klein zu halten. Für R8 wird ein Wert von 300 Ohm gewählt, der den Strom Ic(max) auf 47 mA begrenzt. Die zugehörige Verlustleistung für R8 bei _Kurzschluss_ beträgt:
+    R8(min) = (Vz - Vbe) / Ic(max) = 3,3V – 0,9V / 25mA = 120 Ohm
 
-    Pmax = (Vbat(max) - Vce(sat)) * Ic = (Vbat(max) - Vce(sat))^2 / R8 = (15V – 90mV)2 / 300 = 0,6W
+Für R8 wird ein Wert von 150 Ohm gewählt, der den Strom Ic(max) auf 16 mA begrenzt. Die zugehörige Verlustleistung für R8 bei _Kurzschluss_ beträgt:
+
+    Pmax = (Vbat(max) - Vce(sat)) * Ic = (15V – 90mV) * 16mA = 226mW
 
 Die Kontrollanzeige La1 soll bei Verlust des Öldrucks zur Anzeige kommen. Der Öldrucksensor S1 schaltet gegen Masse. Die Integration des Sensors erfolgt über einfach unter Nutzung einer Schutzdiode.
 
@@ -118,4 +120,4 @@ Die Differenz zur Schaltschwelle der Messstufe (bei _Low_ definiert über Vka = 
 - Elektronik-Kompendium; [Schalten und Steuern mit Transistoren I](http://www.elektronik-kompendium.de/public/schaerer/powsw1.htm)
 
 ### Nächste Seite
-Weiter geht's mit [Lade- und Öldruckkontrollanzeige mit Single-Chip-Anschaltung](kontrollanzeige_2.html).
+Weiter geht's mit [Lade- und Öldruckkontrollanzeige mit CMOS](kontrollanzeige_2.html).
