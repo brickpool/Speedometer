@@ -39,7 +39,7 @@ Der nächst passende Wert für R2 beträgt 27k. Der Widerstand R1 wird unter Ver
     R1 = 33k * (2 * 11,9V / 5V - 1) - 27k
     R1 = 97,1k
 
-Für den Widerstand R1(+R4) wird ein Wert von 100k(+1k) genommen, dieser definiert mit den oben genannten Widerständen R2 und R3 die nun _tatsächlichen_ Umschaltpunkte 12,1V (_Low_) und 13,3V (_High_). Für die Bestimmung der realen Umschaltpunkte können folgende Formeln genutzt werden:
+Für den Widerstand R1(+R6) wird ein Wert von 100k(+1k) genommen, dieser definiert mit den oben genannten Widerständen R2 und R3 die nun _tatsächlichen_ Umschaltpunkte 12,1V (_Low_) und 13,3V (_High_). Für die Bestimmung der realen Umschaltpunkte können folgende Formeln genutzt werden:
 
     V(low) = Vref * (R1 + R2 + R3) / (R2 + R3)
     V(low) = 5V * (100k + 27k + 33k) / (27k + 33k)
@@ -57,10 +57,6 @@ Die Kontrollanzeige _La1_ soll (wie bei der Diskret aufgebauten Schaltung auch) 
 ## Gesamtschaltung Lade-/Öldruckkontrollanzeige
 Zur Anwendung kommt der Timer-Baustein TLC556I (Datenblatt: [tlc556.pdf](http://www.ti.com/lit/gpn/tlc556)), welcher zwei RC-Timer mit gemeinsamer Spannungsvorsorgung hat und für einen Temperaturbereich von -40 bis 85°C vorgesehen ist. An den Betriebsspannungsanschlüssen darf eine Spannung für Vcc (= Betriebsspannung) bis +18V (empfohlen 2 bis 15V) und an den Eingängen _Treshold_, _Trigger_, _Control Voltage_ und _Reset_ eine maximale Spannung gleich der Betriebsspannung angelegt werden. 
 
-Die gesamte Schaltung für die Kontrollanzeige erhalt noch eine zusätzliche _Endstufe_ zur Schaltung der Lampe:
-
-![Schalten der Versorgungsspannung](../images/Schalten_der_Versorgungsspannung_3.png)
-
 Die Schaltug wurde durch eine nachgelagerte [Astabile Kippstufe](http://de.wikipedia.org/wiki/Multivibrator#Astabiler_Multivibrator_mit_NE555) ergänzt, damit die Anzeige nicht nur einfach leuchtet sondern blinkt.
 
 ![Astabile Kippstufe (555)](../images/Astabile_Kippstufe_555.png)
@@ -69,7 +65,11 @@ Zudem wurde die Schaltung angepasst, sodass zwischen den beiden unterschiedliche
 
 Die Beeinflussung der Frequenz erfolgt am Eingang _Control Voltage_ der Astabile Kippstufen, welche vom _Discharge_ Ausgang der Unterspannungschaltung angesteuert wird. Zusätzlich wurde die Anschaltung des Ödruckschalters nicht wie weiter oben an die Unterspannungschaltung sondern, mittels einer einfachen Logik an die nachgelagerten Kippstufe angeschaltet. 
 
-Bleibt noch zu erwähnen, dass beim Ereignis _Öldruckverlust_ die Kontrolllampe schneller blinkt, als beim Ereignis _Störung Generator_ und dass das Ereignis _Störung Generator_ Vorrang hat. In der fertigen Schaltung wird zusätzlich noch ein Stützkondensator C4 von 100nF direkt am SA556 zwischen Speisespannung und Masse eingesetzt.
+Bleibt noch zu erwähnen, dass beim Ereignis _Öldruckverlust_ die Kontrolllampe schneller blinkt, als beim Ereignis _Störung Generator_ und dass das Ereignis _Störung Generator_ Vorrang hat. In der fertigen Schaltung wird zusätzlich noch ein Stützkondensator von 100nF direkt am Timer-IC zwischen Speisespannung und Masse eingesetzt.
+
+Die gesamte Schaltung für die Kontrollanzeige erhält noch eine (bereits bekannte) _Schutzschaltung_ zur Anschaltung der Lampe La1 (siehe [hier](kontrollanzeige_1.html)). Der Abgriff erfolgt daher nicht am Ausgang _Output_ sondern am [Open Collector Ausgang](http://de.wikipedia.org/wiki/Open-Collector-Ausgang) _Dicharge_:
+
+![Schalten der Versorgungsspannung](../images/Schalten_der_Versorgungsspannung_3.png)
 
 ## Quellen und weiterführende Literatur
 

@@ -48,7 +48,7 @@ Zur Anwendung kommt ein Transistor Typ BC557B (Datenblatt: [BC560.pdf](https://w
 
 Die Steuerspannungen Vbe am Transistor bezieht sich bei einem PNP-Transistor auf die positive Versorgungsspannung und nicht auf Masse. Ein PNP immer schaltet dann durch, wenn Vbe die Schaltschwelle unterschreiten, also Vin um Vbe kleiner ist als die Spannung Ve am Emitter.
 
-Der Basiswiderstand R7 berechnet sich aus (Vbat-Vbe) / Ib. Etwas versteckt bei den Daten und der Kennlinie zu Vce(sat) (der Kollektor-Emitter-Sättigungsspannung) findet man eine Referenzwert für die Sättigung von Ic = 20*Ib. D.h. gerechnet wird mit einer Stromverstärkung in Sättigung von 20. Da nur kleine Ströme fließen (Ic < 10 mA und somit Ib < 0,5 mA) wird Vce(sat) mit dem im Datenblatt angegeben Wert von 90mV angesetzt.
+Der Basiswiderstand R7 berechnet sich aus (Vbat-Vbe) / Ib. Etwas versteckt bei den Daten und der Kennlinie zu Vce(sat) (der Kollektor-Emitter-Sättigungsspannung) findet man eine Referenzwert für die Sättigung von Ic = 20*Ib. D.h. gerechnet wird mit einer Stromverstärkung in Sättigung von 20. Da nur kleine Ströme fließen (Ic < 10 mA und somit Ib < 0,5 mA) wird Vce(sat) mit dem im Datenblatt angegeben Wert von 0,3V angesetzt.
 
 Die Versorgungsspannung vom Instrument beträgt 10V bis 15V. Etwa 0,7V fallen an der Basis-Emitter-Strecke ab (Vbe aus Kennlinie des Datenblatt für den BC557B geschätzt), also wird bei einer niedrigen Versorgungsspannung von 10V für eine vernünftige Durchschaltung ein passender Widerstand R7 benötigt.
 
@@ -71,17 +71,21 @@ In unserem im Anwendungsfall verwenden wir für R6 ein Widerstand von 3,3kOhm.
 
 ![Schalten der Versorgungsspannung Abb. 2](../images/Schalten_der_Versorgungsspannung_2.png)
 
-Da die Anschaltung von La1 erfolgt extern und der PNP-Transistor bei einer Fehlbeschaltung vom Kollektor nicht zerstört wird, wird eine Strombegrenzung eingebracht. Der Widerstand R8 soll bei einem _Kurzschluss_ von La1 den maximalen Kollektorstrom Ic(max) begrenzen. Dieser beträgt laut Datenblatt 100mA. 
+Da die Anschaltung von La1 erfolgt extern und der PNP-Transistor bei einer Fehlbeschaltung vom Kollektor nicht zerstört wird, wird eine Strombegrenzung eingebracht. Widerstand R8 und LED begrenzen den maximalen Kollektorstrom Ic(max) von La1 z.B bei _Kurzschluss_. Warum überhaupt eine LED? Durch Einsatz einer LED anstatt einer Z-Diode kann R8 klein gehalten werden. Zudem hat eine Konstantstromquelle mit LED einen kleineren Temperaturdrift und somit eine bessere Konstanz von Ic als z.B. zwei Dioden, die in Flussrichtung betrieben werden. 
 
-Z-Diode und R7 bilden an der Basis von T2 eine konstante Spannung von Vz = 3,3V. Die zugehörige Basis-Emitter-Spannung Vbe von T2 wird mit 0,9V angesetzt. Der maximale Strom wird erreicht, wenn der Spannungsabfall an R8 den Wert von Vz - Vbe erreicht. Der Mindestwiderstand R8 für einen vorgebenen maximalen Strom von 20mA, lässt sich wie folgt berechnen:
+Die rote LED bewirkt, dass an der Basis von T2 nur eine maximale Spannung von Vf = 1,7V erreicht werden kann. Die zugehörige Basis-Emitter-Spannung Vbe von T2 wird mit 0,7V angesetzt. Der maximale Strom wird erreicht, wenn der Spannungsabfall an R8 den Wert von 1V (Vf - Vbe) erreicht. Der Widerstand R8, für einen vorgebenen maximalen Strom von 10mA, lässt sich wie folgt berechnen:
 
-    R8(min) = (Vz - Vbe) / Ic(max) = 3,3V – 0,9V / 25mA = 120 Ohm
+    R8(min) = (Vf - Vbe) / Ic(max) = 1,7V – 0,7V / 10mA = 100 Ohm
 
-Für R8 wird ein Wert von 150 Ohm gewählt, der den Strom Ic(max) auf 16 mA begrenzt. Die zugehörige Verlustleistung für R8 bei _Kurzschluss_ beträgt:
+Für R8 wird ein Wert von 100 Ohm gewählt, der den Strom Ic(max) auf ca. 10..11 mA begrenzt (Vbe ca. 0,6..0,7 V). Die maximale Verlustleistung für R8 unter _Last_ beträgt weniger als 1/4 Watt:
 
-    Pmax = (Vbat(max) - Vce(sat)) * Ic = (15V – 90mV) * 16mA = 226mW
+    Pmax = (Vbat(max) - Vce(sat)) * Ic = (15V – 0,3V) * 10mA = 0,15W
 
-Die Kontrollanzeige La1 soll bei Verlust des Öldrucks zur Anzeige kommen. Der Öldrucksensor S1 schaltet gegen Masse. Die Integration des Sensors erfolgt über einfach unter Nutzung einer Schutzdiode.
+Die Verlustleistung am Transistor beträgt bei _Kurzschluss_ ebenfalls nur ca. 0,15W. Die Berechnung erfolgt über die Kollektor-Emitter-Spannung Vce = Vbat(max) - V(R8) bei maximalen Strom Ic(max):
+
+    Pmax = (Vbat(max) - V(R8)) * Ic = (15V – 1V) * 10mA = 0,15W
+
+Die Kontrollanzeige La1 soll bei Verlust des Öldrucks zur Anzeige kommen. Der Öldrucksensor S1 schaltet gegen Masse. Die Integration des Sensors erfolgt unter Nutzung einer Schutzdiode.
 
 ## Invertieren der Messstufe
 Es soll mit _positiver_ Logik geschaltet werden, also fügen wir eine NPN-Schaltstufe hinzu, die den Eingang der PNP-Schaltstufe versorgt. Zur Anwendung kommt der passende NPN-Transistor Typ BC547B (Datenblatt: [BC547.pdf](https://www.fairchildsemi.com/datasheets/BC/BC547.pdf)).
@@ -99,11 +103,9 @@ Der daraus resultierende maximale Widerstand für R3 und R4 lässt sich über fo
 
     (R3+R4)max = (Vbat(max) – Vbe) / Ib(min) = (15V – 0,7V) / 0,3mA = 48k
 
-Der Widerstandswert R3 beträgt 4,7kOhm (siehe Messstufe). Für R4 wählen wir den nächst passenden Widerstandswert von 39kOhm aus der E12 Reihe, der den oben genannten Maximalwert nicht übersteigt.
+Der Widerstandswert R3 beträgt 4,7kOhm (siehe Messstufe). Für R4 wählen wir den nächst passenden Widerstandswert von 33kOhm aus der E12 Reihe, der den oben genannten Maximalwert nicht übersteigt.
 
-Der Widerstand R5 vermeidet, dass der Transistor bei starken Störeinstrahlungen teilweise leitet. Je größer der Widerstand R5, umso empfindlicher ist die Schaltung gegen Umwelteinflüsse. Je niedriger dieser Widerstand, desto mehr Strom verbraucht die Schaltung im durchgesteuerten Zustand. Allgemeinen hat sich ein Wert von 10k bis 100kOhm (oder evtl. sogar mehr) bewährt. In unserem im Anwendungsfall verwenden wir für R5 ein Widerstand von 10kOhm.
-
-R5 hat zusammen mit R3 und R4 auch den Zweck die Schaltschwelle über den Transistor zu erhöht, was hier bedeutet, dass die Schaltschwelle an Vin Richtung Versorgungsspannung verschoben wird. Die zugehörige Schaltschwelle Ves lässt wie folgt errechnen:
+R5 hat zusammen mit R3 und R4 den Zweck die Schaltschwelle über den Transistor zu erhöhen, was hier bedeutet, dass die Schaltschwelle an Vin Richtung Versorgungsspannung verschoben wird. Der Widerstand R5 vermeidet auch, dass der Transistor bei starken Störeinstrahlungen teilweise leitet. Die zugehörige Schaltschwelle Ves lässt wie folgt errechnen:
 
     Ves = ((R3 + R4) / R5 + 1) * Vbe = ((4,7k + 33k) / 10k + 1) * 0,7V = 4,5V
 
@@ -118,6 +120,7 @@ Die Differenz zur Schaltschwelle der Messstufe (bei _Low_ definiert über Vka = 
 - KHD-Homepage von Karl-Heinz Domnick; [Transistor-Schaltungen](http://www.domnick-elektronik.de/elekts1.htm)
 - DL6GL von Georg Latzel; [Schalten mit Transistoren](http://dl6gl.de/grundlagen/schalten-mit-transistoren)
 - Elektronik-Kompendium; [Schalten und Steuern mit Transistoren I](http://www.elektronik-kompendium.de/public/schaerer/powsw1.htm)
+- Elektronik-Kompendium; [Transistor-LED-Konstantstromquelle](https://www.elektronik-kompendium.de/public/schaerer/currled.htm)
 
 ### Nächste Seite
 Weiter geht's mit [Lade- und Öldruckkontrollanzeige mit CMOS](kontrollanzeige_2.html).
