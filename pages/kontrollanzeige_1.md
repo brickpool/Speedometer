@@ -37,12 +37,12 @@ Der TL431 soll bei allen Spannungen (Arbeitsbereich vom Instrument 10-15V) zuver
     R3(max) = (Vmin-Vka)/Ika(min) = 10V-2,5V / 1mA = 7,5kOhm
     R3(min) = (Vmax-Vka)/Ika(max) = 15V-2,5V / 100mA = 125Ohm
 
-Bei einer Versorgungsspannung von 10-15V und einem Widerstand R3 von ca. 4,7kOhm beträgt der Strom zwischen Katode und Anode ca. 1,6 bis 2,7mA.
+Bei einer Versorgungsspannung von 10-15V und einem Widerstand R3 von ca. 4,7kOhm beträgt der Strom zwischen Katode und Anode ca. 1,6 (bei 10V) bis 2,7mA (bei 15V).
 
 ## Schalten der Versorgungsspannung
 Die Kontrollleuchte ist im Instrument gegen Masse geschaltet. Sie erfordert also das schalten Versorgungsspannung. Da dies weiterhin elektronisch passieren soll, nutzen wir hierzu ein PNP-Transistor. Hier liegt der Emitter an der Versorgungsspannung vom Fahrzeug (Kl. 30).
 
-Zur Anwendung kommt ein Transistor Typ BC557B (Datenblatt: [BC560.pdf](https://www.fairchildsemi.com/ds/BC/BC560.pdf)) der die Kontrollleuchte La1 bei 12V mit einer gemessenen Last von 2,7kOhm schalten soll. Vorteil eines Transistors gegenüber ein MOSFET ist, dass bei hoher Last (sprich kleinem Lastwiderstand) der Spannungsabfall am Transistor bei _Durchschaltung_ nur ca. 100mV beträgt. 
+Zur Anwendung kommt ein Transistor Typ BC557B (Datenblatt: [BC560.pdf](https://www.fairchildsemi.com/ds/BC/BC560.pdf)) der die Kontrollleuchte La1 bei 12V mit einer gemessenen Last von 2,7kOhm schalten soll. Vorteil des Transistors hier ist, dass der Spannungsabfall am Transistor bei _Durchschaltung_ nur ca. 0,1V bis 0,6V beträgt. 
 
 ![Schalten der Versorgungsspannung Abb. 1](../images/Schalten_der_Versorgungsspannung_1.png)
 
@@ -55,14 +55,14 @@ Die Versorgungsspannung vom Instrument beträgt 10V bis 15V. Etwa 0,7V fallen an
     Ib(min) = Ic(min) / 20 = 3,4 mA / 20 = 0,17mA
     R7(max) = Vbat(min) – Vbe / Ib(min) = (10V – 0,7V) / 0,17mA = 31,8kOhm
 
-Der höchst zulässige Kollektorstrom IC für den Transistortyp beträgt max. 100mA mit einem zugehörigen Basisstrom Ib von 5mA (siehe Datenblatt). In dem Sättigungsbereich fallen bei hohen Strömen an der Basis-Emitter-Strecke 0,9V ab. Bei Versorgungsspannung von 15V ist der hierzu zulässige Widerstand R8 ebenfalls zu berechnen.
+Der höchst zulässige Kollektorstrom IC für den Transistortyp beträgt max. 100mA mit einem zugehörigen Basisstrom Ib von 5mA (siehe Datenblatt). In dem Sättigungsbereich fallen bei hohen Strömen an der Basis-Emitter-Strecke 0,9V ab. Bei Versorgungsspannung von 15V ist der hierzu notwendige Basiswiderstand R7 ebenfalls zu berechnen.
 
     Ib(max) = Ic(max) / 20 = 5,85 mA / 20 = 0,3mA
     R7(min) = Vmax – Vbe / Ib(max) = (15V – 0,9V) / 5mA = 2,8kOhm
 
-Für unseren Anwendungsfall verwenden wir für R7 ein Widerstand von 10kOhm der einen Basisstrom von ca. 0,9 bei 10V bis 1,4 mA bei 15V hervorruft.
+Für unseren Anwendungsfall verwenden wir für R7 ein Widerstand von 10kOhm der einen Basisstrom von ca. 0,9mA (bei 10V) bis 1,4mA (bei 15V) hervorruft.
 
-Damit die Transistorstufe zuverlässig arbeitet, kommt zusätzlich der Widerstand R6 zu Anwendung. Er vermeidet, dass der Transistor bei Störeinstrahlungen teilweise leitet, indem er den Basisanschluss auf die Versorgungsspannung vorspannt, so dass der Transistor sperrt. Erst mit Schalten von Vin gegen Masse wird die Spannung herabgesetzt, so dass der Transistor leitet. Der dabei fließende Querstrom Iq soll ca. 3- bis 10-mal höher als der Basisstrom IB sein. Dabei gilt, je grösser der Querstrom ist, umso schärfer ist der Knick vom sperrenden zum leitenden bzw. gesättigten Transistor.
+Damit die Transistorstufe zuverlässig arbeitet, kommt zusätzlich der Widerstand R6 zu Anwendung. Er vermeidet, dass der Transistor bei Störeinstrahlungen teilweise leitet, indem er den Basisanschluss auf die Versorgungsspannung vorspannt, so dass der Transistor sperrt. Erst mit Schalten von Vin gegen Masse wird die Spannung herabgesetzt, so dass der Transistor leitet. Der dabei fließende _Querstrom_ Iq soll ca. 3- bis 10-mal höher als der Basisstrom Ib sein.
 
     R6(max) = (Vbat(min) - Vin(min)) / Iq(min) = 10V - 90mV / (Ib(min) * 3) = 9,9V / (0,9mA * 3) = 3,5k
     R6(min) = (Vbat(max) - Vin(min)) / Iq(max) = 15V - 90mV / (Ib(max) * 10) = 14,9V / (1,4mA * 10) = 1,1k
@@ -73,7 +73,7 @@ In unserem im Anwendungsfall verwenden wir für R6 ein Widerstand von 3,3kOhm.
 
 Da die Anschaltung von La1 erfolgt extern und der PNP-Transistor bei einer Fehlbeschaltung vom Kollektor nicht zerstört wird, wird eine Strombegrenzung eingebracht. Widerstand R8 und LED begrenzen den maximalen Kollektorstrom Ic(max) von La1 z.B bei _Kurzschluss_. Warum überhaupt eine LED? Durch Einsatz einer LED anstatt einer Z-Diode kann R8 klein gehalten werden. Zudem hat eine Konstantstromquelle mit LED einen kleineren Temperaturdrift und somit eine bessere Konstanz von Ic als z.B. zwei Dioden, die in Flussrichtung betrieben werden. 
 
-Die rote LED bewirkt, dass an der Basis von T2 nur eine maximale Spannung von Vf = 1,7V erreicht werden kann. Die zugehörige Basis-Emitter-Spannung Vbe von T2 wird mit 0,7V angesetzt. Der maximale Strom wird erreicht, wenn der Spannungsabfall an R8 den Wert von 1V (Vf - Vbe) erreicht. Der Widerstand R8, für einen vorgebenen maximalen Strom von 10mA, lässt sich wie folgt berechnen:
+Die rote LED bewirkt, dass an der Basis von T2 nur eine maximale Spannung von Vf = 1,7V (bis 2V, je nach LED) erreicht werden kann. Die zugehörige Basis-Emitter-Spannung Vbe von T2 wird mit 0,7V angesetzt. Der maximale Strom wird erreicht, wenn der Spannungsabfall an R8 den Wert von 1V (Vf - Vbe) erreicht. Der Widerstand R8, für einen vorgebenen maximalen Strom von 10mA, lässt sich wie folgt berechnen:
 
     R8(min) = (Vf - Vbe) / Ic(max) = 1,7V – 0,7V / 10mA = 100 Ohm
 
@@ -111,13 +111,28 @@ R5 hat zusammen mit R3 und R4 den Zweck die Schaltschwelle über den Transistor 
 
 Die Differenz zur Schaltschwelle der Messstufe (bei _Low_ definiert über Vka = 2,5V) liegt also bei ca. +2V.
 
+## Einbringen einer Hysterese
+Der TL431 besitzt Aufgrund des eingbauten [Komperators](https://de.wikipedia.org/wiki/Komparator_(Analogtechnik)) die Eigenschaft auch bei minimalen Über- oder Unterschreiten der Referenzspannung bzw. der definierten Eingangsspannung hin und her zu kippen. Durch Einbringung definierter Schaltschwellen, die sich voneinander durch eine entsprechende Spannungsdifferenz unterscheiden, kann das Gesamtverhalten gegenüber Rauschen oder Störsignale verbessert werden.
+
+Die Erzeugung dieser Schalthysterese kann bei einem Komperator mit Hilfe einer Mitkopplung erreicht werden. In unserem Fall indem ein Teil der (nicht invertierten) Ausgangsspannung an den Eingang des TL431 zurückgeführt wird. Dazu wird lediglich ein Widerstand (R9) benötigt.
+
+![Schmitt-Trigger](../images/Schmitt-Trigger.png)
+
+Eine solche Schaltung wird als [Schmitt-Trigger](https://de.wikipedia.org/wiki/Schmitt-Trigger) bezeichnet. Berechnet wird die Hysterese durch Nutzung folgender Formeln (bei Vin = Vbat und unter Vernachlässigung von R6 weil R9 >> R6):
+
+    Vo = Vref * (R1||R9 + R2) / R2
+       = 2,5V * (R1/R2 * R9/(R1+R9) + 1)
+
+    Vu = Vref * (R1 + R2||R9) / (R2||R9)
+       = 2,5V * (R1/R2 * (R2+R9)/R9 + 1)
+
 ## Quellen und weiterführende Literatur
 
 ### Links
 - Pauls Werkstatt von Paul; [Ladekontrollleuchte mit TL431](http://pauls-werkstatt.blogspot.de/2015/06/ladekontrollleuchte-mit-tl431.html)
 - Fingers elektrische Welt; [Kurze Frage -> schnelle Antwort: Ladekontrollleuchte, Seite 254](http://www.fingers-welt.de/phpBB/viewtopic.php?f=14&t=30&hilit=PLC_1&start=6325)
 - Netzmafia von Prof. Jürgen Plate; [Präzisions-Shunt-Regler TL431](http://www.netzmafia.de/skripten/hardware/TL431/index.html)
-- KHD-Homepage von Karl-Heinz Domnick; [Transistor-Schaltungen](http://www.domnick-elektronik.de/elekts1.htm)
+- Mikrocontroller.net; [Unterspannungsabschaltung gesucht](https://www.mikrocontroller.net/topic/340319#3744991)
 - DL6GL von Georg Latzel; [Schalten mit Transistoren](http://dl6gl.de/grundlagen/schalten-mit-transistoren)
 - Elektronik-Kompendium; [Schalten und Steuern mit Transistoren I](http://www.elektronik-kompendium.de/public/schaerer/powsw1.htm)
 - Elektronik-Kompendium; [Transistor-LED-Konstantstromquelle](https://www.elektronik-kompendium.de/public/schaerer/currled.htm)
