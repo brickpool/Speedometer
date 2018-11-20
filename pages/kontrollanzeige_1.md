@@ -8,11 +8,11 @@ Die Guzzi sowie die Ducati Monster hat eine Ladekontrollleuchte, die im Original
 
 Da sowohl der Regler und Gleichrichter sowie das Instrument ausgetauscht werden, ist eine Anpassung der Funktion Ladekontrollleuchte notwendig. Das China-Instrument bietet leider keine eigene Ladekontrollleute. Da die Tachobeleuchtung als Kontrolle ob Licht eingeschaltet ist ausreicht, wird zukünftig die Lichtkontrollleuchte als Anzeige genommen.
 
-Die Kontrollleuchte soll immer zur Anzeige kommen, wenn mehr Strom der Batterie entnommen wird als hinein fließt. Hierzu wird der Schaltpunkt für die Anzeige einfach über die Ladeschlussspannung definiert. Bei einer 12V Blei-Batterie beträgt die Ladeschlussspannung bei Schonladung 13,8V. Der Generatorspannung muss aber mindestens 13,4V liefern, damit mindestens eine Erhaltungsladung stattfindet. Eine vollgeladene Batterie sollte 12,8 V haben, bei ca. 12,4V ist Sie Normal geladen, bei ca. 12,2V Schwach geladen, bei ca. 11,9 V Normal entladen und bei Werten unterhalb von 10,7 V Tief entladen.
+Die Kontrollleuchte soll immer zur Anzeige kommen, wenn mehr Strom der Batterie entnommen wird als hinein fließt. Hierzu wird der Schaltpunkt für die Anzeige einfach über die Ladeschlussspannung definiert. Bei einer 12V Blei-Batterie beträgt die Ladeschlussspannung bei Schonladung 13,8V. Der Generatorspannung muss aber mindestens 13,4V liefern, damit mindestens eine Erhaltungsladung stattfindet. Eine vollgeladene Batterie sollte 12,8 V haben, bei ca. 12,6V ist Sie **normal geladen**, bei ca. 12,4V **schwach geladen**, bei ca. 12,0 V **normal entladen** und bei Werten unterhalb von 11,8 V **tief entladen**.
 
 Die Guzzi bzw. Ducati besitzt darüber hinaus eine Öldruckanzeige. Der zugehörige Sensor wird bei Problemen gegen Masse geschaltet und bringt im Original im Instrument eine Lampe zur Anzeige, die an die Versorgungsspannung angeschlossen ist.
 
-Die folgende Beispielschaltung soll an einem Fahrzeug mit 12V-Netz eine Kontrollleuchte im Instrument ansteuern. Die Kontrollleuchte La1 wird ab einer Spannung von unter 13,8V an Kl.61 eingeschaltet. Zudem schaltet der Schalter S1 (geschaltet gegen Masse) ebenfalls die Kontrollleuchte.
+Die folgende Beispielschaltung soll an einem Fahrzeug mit 12V-Netz eine Kontrollleuchte im Instrument ansteuern. Die Kontrollleuchte La1 wird bei einer Spannung von unter 12,6V (+/- 5%) an [Klemme 61](http://de.wikipedia.org/wiki/Klemmenbezeichnung#Beleuchtung) eingeschaltet. Zudem schaltet der Schalter S1 (geschaltet gegen Masse) ebenfalls die Kontrollleuchte.
 
 ![Lade-/Öldruckkontrollanzeige](../images/Kontrollanzeige.png)
 
@@ -22,13 +22,13 @@ Spannungsteiler an Vref lässt sich stufenlos eine Spannung zwischen circa 2,5V 
 
 Der Spannungsteiler aus R1 und R2 lässt sich mit folgender Formel bestimmen.
 
-    V0 = (1+(R1/R2))*Vref
+    Vin = (1+(R1/R2))*Vref
 
-Durch die eng tolerierte Referenzspannung Vref von typischerweise 2,495V (siehe Datenblatt) und den schwachen Eingangsstrom an Vref (Iref) von 2 bis 4 μA (siehe Datenblatt) lässt sich der Spannungsteiler ziemlich genau berechnen. Mit den Normwerten 6,8k und 1,5k schaltet der TL431 bei V0 = 13,8V zwischen Katode und Anode durch.
+Durch die eng tolerierte Referenzspannung Vref von typischerweise 2,495V (siehe Datenblatt) und den schwachen Eingangsstrom an Vref (Iref) von 2 bis 4 μA (siehe Datenblatt) lässt sich der Spannungsteiler ziemlich genau berechnen. Mit den Normwerten 33k und 8,2k schaltet der TL431 bei Vin = 12,5V zwischen Katode und Anode durch.
 
 ![Messen der Spannung an Kl.61 Abb. 1](../images/Messung_Spannung_Kl.61_1.png)
 
-Zum Schutz vor negativen Spannungsspitzen (bis zu -100V) wird zusätzlich eine Diode vom Typ BAV20 eingesetzt. Ein Kondensator (4,7μF / 160V) puffert bei kurzen Spannungseinbrüchen. An der Diode fällt in Durchlassrichtung eine Spannung von Uf = 1V ab (V0 ist somit 12,8V). Für eine Feinanpassung wird ein Potenziometer mit 1k eingesetzt. Mit den Normwerten von 10k und 2k und unter Berücksichtigung von Uf inkl. Toleranzen (E24-Normreihe mit 5% Toleranz) können mit dem Potentiometer P1 in jedem Fall Spannungsschaltwerte zwischen 12,6V und 14,8V eingestellt werden.
+Zum Schutz vor negativen Spannungsspitzen (bis zu -100V) wird zusätzlich eine Diode vom Typ BAV20 eingesetzt. Ein Kondensator (4,7μF / 160V) puffert bei kurzen Spannungseinbrüchen. An der Diode fällt in Durchlassrichtung eine Spannung von Uf = 0,8V ab (Vin ist somit 11,8V). Für eine Feinanpassung kann ein Potenziometer mit 2k eingesetzt werden. Mit den Normwerten von 18k und 4,7k und unter Berücksichtigung von Uf inkl. Toleranzen (E24-Normreihe mit 5% Toleranz) kann mit dem Potentiometer P1 in jedem Fall die gewünschte Spannungsschaltwerte von 12,6V eingestellt werden.
 
 ![Messen der Spannung an Kl.61 Abb. 2](../images/Messung_Spannung_Kl.61_2.png)
 
@@ -114,28 +114,35 @@ Die Differenz zur Schaltschwelle der Messstufe (bei _Low_ definiert über Vka = 
 ## Einbringen einer Hysterese
 Der TL431 besitzt Aufgrund des eingbauten [Komperators](https://de.wikipedia.org/wiki/Komparator_(Analogtechnik)) die Eigenschaft auch bei minimalen Über- oder Unterschreiten der Referenzspannung bzw. der definierten Eingangsspannung hin und her zu kippen. Durch Einbringung definierter Schaltschwellen, die sich voneinander durch eine entsprechende Spannungsdifferenz unterscheiden, kann das Gesamtverhalten gegenüber Rauschen oder Störsignale verbessert werden.
 
-Die Erzeugung dieser Schalthysterese kann bei einem Komperator mit Hilfe einer Mitkopplung erreicht werden. In unserem Fall indem ein Teil der (nicht invertierten) Ausgangsspannung an den Eingang des TL431 zurückgeführt wird. Dazu wird lediglich ein Widerstand (R9) benötigt.
+Die Erzeugung dieser Schalthysterese kann bei einem Komperator mit Hilfe einer Mitkopplung erreicht werden. In unserem Fall indem ein Teil der Ausgangsspannung Vout von T1 (nicht-invertierende Spannung zum Eingang) an den Eingang Ref (Komperator +) des TL431 zurückgeführt wird. Dazu wird lediglich ein Widerstand (R9) benötigt.
 
 ![Schmitt-Trigger](../images/Schmitt-Trigger.png)
 
-Eine solche Schaltung wird als [Schmitt-Trigger](https://de.wikipedia.org/wiki/Schmitt-Trigger) bezeichnet. Berechnet wird die Hysterese durch Nutzung folgender Formeln (bei Vin = Vbat und unter Vernachlässigung von R6 weil R9 >> R6):
+Eine solche Schaltung wird als (nicht-invertierender) [Schmitt-Trigger](https://de.wikipedia.org/wiki/Schmitt-Trigger) bezeichnet. Berechnet wird die Hysterese durch Nutzung folgender Formeln (bei Vin = Vbat und unter Vernachlässigung von R6 weil R9 >> R6):
 
-    Vo = Vref * (R1||R9 + R2) / R2
-       = 2,5V * (R1/R2 * R9/(R1+R9) + 1)
+    Vo = Vref * (R1 + R2||R9) / (R2||R9) + Vf
+       = 2,5V * (R1/R2 * (R2+R9)/R9 + 1) + 0,8V
+       = 2,5V * (18k/4,7k * (4,7k+150k)/150k + 1) + 0,8V
+       = 13,2V
 
-    Vu = Vref * (R1 + R2||R9) / (R2||R9)
-       = 2,5V * (R1/R2 * (R2+R9)/R9 + 1)
+    Vu = Vref * (R1||R9 + R2) / R2 + Vf
+       = 2,5V * (R1/R2 * R9/(R1+R9) + 1) + 0,8V
+       = 2,5V * (18k/4,7k * 150k/(18k+150k) + 1) + 0,8V
+       = 11,8V
 
 ## Quellen und weiterführende Literatur
 
 ### Links
+- Wikipedia; [Starterbatterie](http://de.wikipedia.org/wiki/Starterbatterie#Wartung,_Pflege_und_Prüfung)
 - Pauls Werkstatt von Paul; [Ladekontrollleuchte mit TL431](http://pauls-werkstatt.blogspot.de/2015/06/ladekontrollleuchte-mit-tl431.html)
 - Fingers elektrische Welt; [Kurze Frage -> schnelle Antwort: Ladekontrollleuchte, Seite 254](http://www.fingers-welt.de/phpBB/viewtopic.php?f=14&t=30&hilit=PLC_1&start=6325)
 - Netzmafia von Prof. Jürgen Plate; [Präzisions-Shunt-Regler TL431](http://www.netzmafia.de/skripten/hardware/TL431/index.html)
-- Mikrocontroller.net; [Unterspannungsabschaltung gesucht](https://www.mikrocontroller.net/topic/340319#3744991)
+- Mikrocontroller.net; [Unterspannungsabschaltung gesucht](http://www.mikrocontroller.net/topic/340319#3744991)
+- Mikrocontroller.net; [LTspice Schaltung mit TL431 so richtig?](http://www.mikrocontroller.net/topic/380034#4323523)
 - DL6GL von Georg Latzel; [Schalten mit Transistoren](http://dl6gl.de/grundlagen/schalten-mit-transistoren)
 - Elektronik-Kompendium; [Schalten und Steuern mit Transistoren I](http://www.elektronik-kompendium.de/public/schaerer/powsw1.htm)
-- Elektronik-Kompendium; [Transistor-LED-Konstantstromquelle](https://www.elektronik-kompendium.de/public/schaerer/currled.htm)
+- Elektronik-Kompendium; [Schmitt-Trigger (nicht-invertierender)](http://www.elektronik-kompendium.de/sites/bau/0209241.htm)
+- Elektronik-Kompendium; [Transistor-LED-Konstantstromquelle](http://www.elektronik-kompendium.de/public/schaerer/currled.htm)
 
 ### Nächste Seite
 Weiter geht's mit [Lade- und Öldruckkontrollanzeige mit CMOS](kontrollanzeige_2.html).
