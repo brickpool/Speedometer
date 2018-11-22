@@ -70,7 +70,7 @@ Balken | Spannung  | Strom  | Widerstandswert
 1 | 1121 mV | 13,1 mA | 85,9 Ohm
 Anzeige blinkt | 1205 mV | 12,8 mA | 94,3 Ohm
 
-![Benzinstandsanzeige](images/Benzinstandsanzeige.png)
+![Benzinstandsanzeige](images/Benzinstandsanzeige_1.png)
 
 Die Leerlaufspannung der Konstantstromquelle beträgt ca. 5 Volt.
 
