@@ -20,39 +20,48 @@ voll | 10mA  | 12,4V             | 0,2V
 leer | 78mA  | 2,2V              | 10,4V (Kontrollleuchte an)
 
 ```
-  Vbat        .---------+-------------------+---------->> 7V5
-    |         |         |                   |
-   .-/        |        .-.        ___      .-.
-   |/| NTC    = 1N4148 | |22k .--|___|--.  | |10k
-   /-'        ^        '-'    |   33k   |  '-'    .-----o A
-    |         |         |     |         |   |     |
-  E o         |         +-----+---|+\   |   |   |/c
-    |   ___   |   ___   |    LM393|  >--+---+---|  BC547b
-    +--|___|--+--|___|--)---------|-/       |   |\e
-    |   10k   |    2k   |                   V     |
-   .-.        |        .-.           1N4148 =    .-.
-   | |195     = 1N4148 | |27k               |    | |10
-   '-'        ^        '-'                  V    '-'
-    |         |         |             BAT41 =     |
- o--+---------+---------+-------------------+-----'
+  Vbat       Vcc                              Vcc
+    |         |                                |
+   .-/        |                      ___      .-.
+   |/| NTC    = 1N4148           .--|___|--.  | |10k
+   /-'        ^                  |   100k  |  '-'    .----o A
+    |         |         10k___   |         |   |     |
+  E o         |   Vref <--|___|--+---|+\   |   |   |/c
+    |   ___   |            ___  LM393|  >--+---+---|  BC547b
+    +--|___|--+---------+-|___|------|-/       |   |\e
+    |   10k   |         |  1k                  V     |
+   .-.        |        _|_              1N4148 =    .-.
+   | |195     = 1N4148 --- 1n                  |    | |10
+   '-'        ^         |                      V    '-'
+    |         |         |                BAT41 =     |
+ o--+---------+---------+----------------------+-----'
     |
    ===
 ```
 
 Der Invertierende [Schmitt-Trigger](http://de.wikipedia.org/wiki/Schmitt-Trigger) wird mit Hilfe eines Komparators (hier LM393) realisiert.
 
-Die Referenzspannung wird mittels der beiden Widerstände 22k und 27k am positiven Eingang des Komperators angelegt. Der Widerstand mit dem Wert von 33k sorgt für die Mitkopplung und damit für die Hysterese welche im Verhältnis zum Einsgangswiderstand (ca. 12k = `22k||27k`) berechnet ist.
+Die Referenzspannung wird mittels einer Referenzspannung von 4,3V über einen Eingangswiderstand am positiven Eingang des Komperators angelegt. Ein zusätzlicher Widerstand (hier 100k) sorgt für die Mitkopplung und damit für die Hysterese welche im Verhältnis zum Einsgangswiderstand berechnet wird.
 
-Die drei oben genannten Widerstandswerte sind so ausgelegt, dass bei Nutzung einer Versorgungsspannung von 7,5V folgendes Verhalten erzielt wird:
-- Wird am Eingang die Spannung von 3V unterschritten, geht der Komperator in die positive Sättigung und der NPN Transistor leitet. Am Ausgang liegt der 10 Ohm Widerstand gegen Masse.
-- Sofern 5V überschritten werden, geht der Komperator in die negative Sättigung und der Transsitor sperrt. Der Ausgang ist somit unbeschaltet. 
+  R(hys) = Re * (2 * Vcc/(V(high)-V(low)) - 1)
+
+Ist die Referenzspannung (wie hier) die Hälfte von Vcc kann folgende vereinfachte Formel verwendet werden, um die Hysterese zu berechnen:
+
+  V(hys) = Vref * (Re/R(hys) + 1) = V(high) - V(low)
+
+Mit einem Eingangswiderstandswert von 10k und einem Widerstand von 100k für die Hysterese, wird bei Nutzung einer Versorgungsspannung von Vcc = 8,6V und einer Referenzspannung von Vcc/2 folgendes Verhalten erzielt:
+- Sobald am Eingang die Spannung von 4,1V unterschritten (entspricht V(low)) wird, geht der Komperator in die positive Sättigung und der NPN Transistor leitet. Am Ausgang liegt ein 10 Ohm Widerstand gegen Masse.
+- Sofern 4,5V überschritten werden (entspricht V(high)), geht der Komperator in die negative Sättigung und der Transsitor sperrt. Der Ausgang ist somit unbeschaltet.
+
+Die in Serie geschaltete Schottky Diode BAT41 und Kleinsignaldiode 1N4148 dienen zusammen als Strombegrenzung (ca. 30mA) für den 10 Ohm Widerstand, sprich den über Ausgang _A_ zugeführten Strom.
 
 ## Quellen und weiterführende Literatur
 
 ### Links
+- Duc-Forum.de; [Tankkontrollleuchte LED für alte SS/Monster funzt](http://www.duc-forum.de/thread.php?threadid=71131)
 - Wikipedia; [Heißleiter](https://de.wikipedia.org/wiki/Hei%C3%9Fleiter)
 - Wikipedia; [Elektrische Eigenschaften einer Glühlampe](https://de.wikipedia.org/wiki/Gl%C3%BChlampe#Elektrische_Eigenschaften)
-- Duc-Forum.de; [Tankkontrollleuchte LED für alte SS/Monster funzt](http://www.duc-forum.de/thread.php?threadid=71131)
+- ElectronicsTutorials; [OPV-Komparator](https://www.electronics-tutorials.ws/de/operationsverstarker/opamp-komparator.html)
 
 ### Nächste Seite
 Weiter geht's mit [Zündsignalwandler](zuendsignalwandler_1.html).

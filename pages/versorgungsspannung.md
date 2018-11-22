@@ -28,7 +28,7 @@ Eine Stabilisierung mittles Z-Diode ist einfach und ausreichend für die angesch
 
 ![KFZ-Versorgungsspannung Abb. 3](../images/Versorgungsspannung_3.png)
 
-Da die Z-Dioden beim _Versuch_, die Spannung zu stabilisieren, ein elektrisches Welligkeit auf der Versorgung erzeugt, kommt ein zusätzlicher Entkopplungskondensators von 22μF/16V zum Einsatz, der kurze Lastspitzen abfängt und die Restwelligkeit der Ausgangsspannung reduziert.
+Da die Z-Dioden beim _Versuch_, die Spannung zu stabilisieren, eine elektrische Welligkeit auf der Versorgung erzeugt, kommt ein zusätzlicher Entkopplungskondensators von 22μF/16V zum Einsatz, der kurze Lastspitzen abfängt und die Restwelligkeit der Ausgangsspannung reduziert.
 
 Die Beiden Z-Dioden bilden zusätzlich eine Schutzmaßnahme gegen Überspannung für alle ICs:
 
