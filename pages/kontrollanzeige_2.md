@@ -74,12 +74,12 @@ Die gesamte Schaltung für die Kontrollanzeige erhält noch eine (bereits bekann
 ## Quellen und weiterführende Literatur
 
 ### Links
-- Elektronik-Kompendium; [Pullup-, Pulldown-Widerstand , Maßnahmen zur Entstörung bei langer Leitung, Openkollektor - Wired-OR - Latchup-Risiken](http://www.elektronik-kompendium.de/public/schaerer/pullr.htm)
-- Elektronik-Kompendium; [Überspannungsschutz von empfindlichen
+- Elektronik-Kompendium; [Pullup-, Pulldown-Widerstand , Massnahmen zur Entstoerung bei langer Leitung, Openkollektor - Wired-OR - Latchup-Risiken](http://www.elektronik-kompendium.de/public/schaerer/pullr.htm)
+- Elektronik-Kompendium; [Ueberspannungsschutz von empfindlichen Verstaerkereingaengen](http://www.elektronik-kompendium.de/public/schaerer/ovprot.htm)
 - Elektronik-Kompendium; [Timer NE555 und NE556](https://www.elektronik-kompendium.de/sites/bau/0206115.htm)
 - Burton Lang; [NE555 Low Voltage Battery Disconnect Circuit](http://www.gorum.ca/lvdisc.html)
 - [Das CMOS Kochbuch](https://www.amazon.de/Das-CMOS-Kochbuch-Don-Lancaster/dp/3883220027) von Don Lancaster; ISBN 3-88322-002-7
-Verstärkereingängen](http://www.elektronik-kompendium.de/public/schaerer/ovprot.htm)
+
 
 ### Nächste Seite
 Weiter geht's mit [Bezinstandsanzeige Ducati](benzinstandsanzeige.html).

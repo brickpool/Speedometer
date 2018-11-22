@@ -8,7 +8,7 @@ Die Guzzi sowie die Ducati Monster hat eine Ladekontrollleuchte, die im Original
 
 Da sowohl der Regler und Gleichrichter sowie das Instrument ausgetauscht werden, ist eine Anpassung der Funktion Ladekontrollleuchte notwendig. Das China-Instrument bietet leider keine eigene Ladekontrollleute. Da die Tachobeleuchtung als Kontrolle ob Licht eingeschaltet ist ausreicht, wird zukünftig die Lichtkontrollleuchte als Anzeige genommen.
 
-Die Kontrollleuchte soll immer zur Anzeige kommen, wenn mehr Strom der Batterie entnommen wird als hinein fließt. Hierzu wird der Schaltpunkt für die Anzeige einfach über die Ladeschlussspannung definiert. Bei einer 12V Blei-Batterie beträgt die Ladeschlussspannung bei Schonladung 13,8V. Der Generatorspannung muss aber mindestens 13,4V liefern, damit mindestens eine Erhaltungsladung stattfindet. Eine vollgeladene Batterie sollte 12,8 V haben, bei ca. 12,6V ist Sie **normal geladen**, bei ca. 12,4V **schwach geladen**, bei ca. 12,0 V **normal entladen** und bei Werten unterhalb von 11,8 V **tief entladen**.
+Die Kontrollleuchte soll immer zur Anzeige kommen, wenn mehr Strom der Batterie entnommen wird als hinein fließt. Hierzu wird der Schaltpunkt für die Anzeige einfach über die Ladeschlussspannung definiert. Bei einer 12V Blei-Batterie beträgt die Ladeschlussspannung bei Schonladung 13,8V. Der Generatorspannung muss aber mindestens 13,4V liefern, damit mindestens eine Erhaltungsladung stattfindet. Eine **vollgeladene** Batterie sollte 12,8 V haben, bei ca. 12,6V ist Sie **normal geladen**, bei ca. 12,4V **schwach geladen**, bei ca. 12,0 V **normal entladen** und bei Werten unterhalb von 11,8 V **tief entladen**.
 
 Die Guzzi bzw. Ducati besitzt darüber hinaus eine Öldruckanzeige. Der zugehörige Sensor wird bei Problemen gegen Masse geschaltet und bringt im Original im Instrument eine Lampe zur Anzeige, die an die Versorgungsspannung angeschlossen ist.
 
@@ -112,30 +112,29 @@ R5 hat zusammen mit R3 und R4 den Zweck die Schaltschwelle über den Transistor 
 Die Differenz zur Schaltschwelle der Messstufe (bei _Low_ definiert über Vka = 2,5V) liegt also bei ca. +2V.
 
 ## Einbringen einer Hysterese
-Der TL431 besitzt Aufgrund des eingbauten [Komperators](https://de.wikipedia.org/wiki/Komparator_(Analogtechnik)) die Eigenschaft auch bei minimalen Über- oder Unterschreiten der Referenzspannung bzw. der definierten Eingangsspannung hin und her zu kippen. Durch Einbringung definierter Schaltschwellen, die sich voneinander durch eine entsprechende Spannungsdifferenz unterscheiden, kann das Gesamtverhalten gegenüber Rauschen oder Störsignale verbessert werden.
+Der TL431 wird bei minimalen Über- oder Unterschreiten der Referenzspannung bzw. der definierten Eingangsspannung hin und her kippen. Durch Einbringung definierter Schaltschwellen, die sich voneinander durch eine entsprechende Spannungsdifferenz unterscheiden, kann jedoch das Gesamtverhalten gegenüber Rauschen oder Störsignale verbessert werden.
 
-Die Erzeugung dieser Schalthysterese kann bei einem Komperator mit Hilfe einer Mitkopplung erreicht werden. In unserem Fall indem ein Teil der Ausgangsspannung Vout von T1 (nicht-invertierende Spannung zum Eingang) an den Eingang Ref (Komperator +) des TL431 zurückgeführt wird. Dazu wird lediglich ein Widerstand (R9) benötigt.
+Die Erzeugung dieser Schalthysterese kann wie bei einem [Komperator](https://de.wikipedia.org/wiki/Komparator_(Analogtechnik)) mit Hilfe einer Mitkopplung erreicht werden. In unserem Fall indem ein Teil der Ausgangsspannung Vout von T1 (nicht-invertierende Spannung zum Eingang) an den Eingang Ref (Komperator +) des TL431 zurückgeführt wird. Dazu wird lediglich ein Widerstand (R9) benötigt.
 
 ![Schmitt-Trigger](../images/Schmitt-Trigger.png)
 
 Eine solche Schaltung wird als (nicht-invertierender) [Schmitt-Trigger](https://de.wikipedia.org/wiki/Schmitt-Trigger) bezeichnet. Berechnet wird die Hysterese durch Nutzung folgender Formeln (bei Vin = Vbat und unter Vernachlässigung von R6 weil R9 >> R6):
 
-    Vo = Vref * (R1 + R2||R9) / (R2||R9) + Vf
-       = 2,5V * (R1/R2 * (R2+R9)/R9 + 1) + 0,8V
-       = 2,5V * (18k/4,7k * (4,7k+150k)/150k + 1) + 0,8V
-       = 13,2V
+    V(low) = Vref * (R1||R9 + R2) / R2 + Vf
+           = 2,5V * (R1/R2 * R9/(R1+R9) + 1) + 0,8V
+           = 2,5V * (18k/4,7k * 150k/(18k+150k) + 1) + 0,8V
+           = 11,8V
 
-    Vu = Vref * (R1||R9 + R2) / R2 + Vf
-       = 2,5V * (R1/R2 * R9/(R1+R9) + 1) + 0,8V
-       = 2,5V * (18k/4,7k * 150k/(18k+150k) + 1) + 0,8V
-       = 11,8V
+    V(high) = Vref * (R1 + R2||R9) / (R2||R9) + Vf
+            = 2,5V * (R1/R2 * (R2+R9)/R9 + 1) + 0,8V
+            = 2,5V * (18k/4,7k * (4,7k+150k)/150k + 1) + 0,8V
+            = 13,2V
 
 ## Quellen und weiterführende Literatur
 
 ### Links
 - Wikipedia; [Starterbatterie](http://de.wikipedia.org/wiki/Starterbatterie#Wartung,_Pflege_und_Prüfung)
 - Pauls Werkstatt von Paul; [Ladekontrollleuchte mit TL431](http://pauls-werkstatt.blogspot.de/2015/06/ladekontrollleuchte-mit-tl431.html)
-- Fingers elektrische Welt; [Kurze Frage -> schnelle Antwort: Ladekontrollleuchte, Seite 254](http://www.fingers-welt.de/phpBB/viewtopic.php?f=14&t=30&hilit=PLC_1&start=6325)
 - Netzmafia von Prof. Jürgen Plate; [Präzisions-Shunt-Regler TL431](http://www.netzmafia.de/skripten/hardware/TL431/index.html)
 - Mikrocontroller.net; [Unterspannungsabschaltung gesucht](http://www.mikrocontroller.net/topic/340319#3744991)
 - Mikrocontroller.net; [LTspice Schaltung mit TL431 so richtig?](http://www.mikrocontroller.net/topic/380034#4323523)

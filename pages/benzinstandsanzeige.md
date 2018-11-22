@@ -22,26 +22,26 @@ leer | 78mA  | 2,2V              | 10,4V (Kontrollleuchte an)
 ```
   Vbat        .---------+-------------------+---------->> 7V5
     |         |         |                   |
-   .-/        =        .-.        ___      .-.
-   |/| NTC    ^ 1N4148 | |22k .--|___|--.  | |10k
-   /-'        |        '-'    |   33k   |  '-'    .-----o A
-    |         |         |     |   |\    |   |     |
+   .-/        |        .-.        ___      .-.
+   |/| NTC    = 1N4148 | |22k .--|___|--.  | |10k
+   /-'        ^        '-'    |   33k   |  '-'    .-----o A
+    |         |         |     |         |   |     |
   E o         |         +-----+---|+\   |   |   |/c
     |   ___   |   ___   |    LM393|  >--+---+---|  BC547b
     +--|___|--+--|___|--)---------|-/       |   |\e
-    |   10k   |    2k   |         |/        V     |
-   .-.        =        .-.           1N4148 =    .-.
-   | |195     ^ 1N4148 | |27k               |    | |10
-   '-'        |        '-'                  V    '-'
+    |   10k   |    2k   |                   V     |
+   .-.        |        .-.           1N4148 =    .-.
+   | |195     = 1N4148 | |27k               |    | |10
+   '-'        ^        '-'                  V    '-'
     |         |         |             BAT41 =     |
  o--+---------+---------+-------------------+-----'
     |
    ===
 ```
 
-Der Invertierende [Schmitt-Trigger](http://de.wikipedia.org/wiki/Schmitt-Trigger) wird mit Hilfe eines Komparators (hier LM393) realisiert. 
+Der Invertierende [Schmitt-Trigger](http://de.wikipedia.org/wiki/Schmitt-Trigger) wird mit Hilfe eines Komparators (hier LM393) realisiert.
 
-Die Referenzspannung wird mittels der beiden Widerstände 22k und 27k am positiven Eingang des Komperators angelegt. Der Widerstand mit dem Wert von 33k sorgt für die Mitkopplung und damit für die Hysterese welche im Verhältnis zum Einsgangswiderstand (ca. 12k = 22k || 27k) berechnet ist.
+Die Referenzspannung wird mittels der beiden Widerstände 22k und 27k am positiven Eingang des Komperators angelegt. Der Widerstand mit dem Wert von 33k sorgt für die Mitkopplung und damit für die Hysterese welche im Verhältnis zum Einsgangswiderstand (ca. 12k = `22k||27k`) berechnet ist.
 
 Die drei oben genannten Widerstandswerte sind so ausgelegt, dass bei Nutzung einer Versorgungsspannung von 7,5V folgendes Verhalten erzielt wird:
 - Wird am Eingang die Spannung von 3V unterschritten, geht der Komperator in die positive Sättigung und der NPN Transistor leitet. Am Ausgang liegt der 10 Ohm Widerstand gegen Masse.
