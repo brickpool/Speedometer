@@ -6,7 +6,7 @@ description: Universal LCD Motorrad Tachometer
 
 Die Guzzi besitzt keinen Geber und keine Reservelampe. Ein offener Anschluss und Werte größer 90 bzw. 500 Ohm bringen die Füllstandsanzeige des Kombiinstrumentes zum Blinken. Der Anschluss für die Tankanzeige muss daher passend beschaltet werden, da sonst eine blinkende Tankanzeige am Instrument stört. Die einfachste Methode ist es, dass Instrument auf einen Sensor von 500 Ohm umzuprogrammieren und mittels 470 Ohm Widerstand den Anschluss für die Tankanzeige gegen Masse zu schalten. Es wird dann nur der untere Balken angezeigt.
 
-Die Ducati Monster verwendet ein Heißleiter (abk. NTC) als Benzinstandgeber. Der Sensor wird bei ausreichend gefüllten Tank vom Benzin umflossen und ist dadurch kalt. Der innenliegende Heißleiter leitet somit schlecht und verhindert so das Einschalten der zugehörigen Kontrolllampe im Instrument. Sofern der Sensor nicht ausreichend von Benzin umgeben ist, erwärmt sich der Heißleiter (langsam) durch den Stromfluss und verliert (almählich) seinen hohen Anfangswiderstand.
+Die Ducati Monster verwendet ein Heißleiter (abk. NTC) als Benzinstandgeber. Der Sensor wird bei ausreichend gefüllten Tank vom Benzin umflossen und ist dadurch kalt. Der innenliegende Heißleiter leitet somit schlecht und verhindert so das Einschalten der zugehörigen Kontrolllampe im Original-Instrument. Sofern der Sensor nicht ausreichend von Benzin umgeben ist, erwärmt sich der Heißleiter (langsam) durch den Stromfluss und verliert (almählich) seinen hohen Anfangswiderstand.
 
 Aufgrund der Kaltleitereigenschaft einer Glühlampe kommt es zu einem zügigen Umschalten, sofern die Glühwendel auf Betriebstemperatur aufgeheizt ist. Mit steigender Temperatur erhöht sich der elektrische Widerstand und somit der Spannungsabfall an der Glühlampe, womit die Glühlampe die volle elektrische Leistung erhält. 
 
@@ -19,7 +19,7 @@ Tank | Strom | Spannung am Geber | Spannung a.d. Glühlampe
 voll | 10mA  | 12,4V             | 0,2V
 leer | 78mA  | 2,2V              | 10,4V (Kontrollleuchte an)
 
-## Reserveanzeige
+## Tanklevelanzeige
 Die Tanklevelanzeige vom Kombiinstrument arbeitet auf Widerstandbasis. Zur Bestimmung des Widerstanswerte misst das Instrument die Spannung bei einem vorgegebenen konstanten Strom.
 
 Wie bereits weiter oben beschrieben verhält sich der Benzinstandsgeber der Ducati nicht wie ein _Widerstandsgeber_, sondern eher wie ein _Schalter_. Die folgende Schaltung kann daher nur die beiden Zuständen **leer** (Balkenanzeige blinkt, entspricht Widerstand unendlich) oder **voll** (volle Balkenanzeige, Widerstand 10 Ohm) anzeigen. 
@@ -28,7 +28,7 @@ Wie bereits weiter oben beschrieben verhält sich der Benzinstandsgeber der Duca
 
 Der Invertierende [Schmitt-Trigger](http://de.wikipedia.org/wiki/Schmitt-Trigger) wird mit Hilfe eines Komparators ([LM293.pdf](http://www.ti.com/lit/ds/symlink/lm393a.pdf)) realisiert.
 
-Die Referenzspannung wird mittels einer Referenzspannung von 4,3V über einen Eingangswiderstand am positiven Eingang des Komperators angelegt. Ein zusätzlicher Widerstand (hier 330k) sorgt für die Mitkopplung und damit für die Hysterese welche im Verhältnis zum Einsgangswiderstand berechnet wird (bei Single Supply und Rh >> R(pullup)).
+Die Referenzspannung wird mittels einer Z-Diode von 4,3V über einen Eingangswiderstand am positiven Eingang des Komperators angelegt. Ein zusätzlicher Widerstand (hier 330k) sorgt für die Mitkopplung und damit für die Hysterese welche im Verhältnis zum Einsgangswiderstand berechnet wird (bei Single Supply und Rh >> R(pullup)).
 
     R(hys) = Re * (Vcc/(V(high)-V(low)) - 1)
 
@@ -40,7 +40,7 @@ Mit einem Eingangswiderstandswert von 33k und einem Widerstand von 330k für die
 - Sobald am Eingang die Spannung von 3,9V unterschritten wird (Vin < V(low)), geht der Komperator in die positive Sättigung und der NPN Transistor leitet. Am Ausgang liegt ein 10 Ohm Widerstand gegen Masse.
 - Sofern 4,7V überschritten werden (Vin > V(high)), geht der Komperator in die negative Sättigung und der Transitor sperrt. Der Ausgang ist somit unbeschaltet.
 
-Die in Serie geschaltete Schottky Diode BAT41 und Kleinsignaldiode 1N4148 dienen zusammen als Strombegrenzung (ca. 30mA) für den 10 Ohm Widerstand, sprich den über Ausgang _A_ zugeführten Strom.
+Die in Serie geschaltete Schottky Diode BAT41 und Kleinsignaldiode 1N4148 dienen als Strombegrenzung (ca. 30mA) für den 10 Ohm Widerstand, sprich den über Ausgang _Out_ zugeführten Strom.
 
 ## Quellen und weiterführende Literatur
 
