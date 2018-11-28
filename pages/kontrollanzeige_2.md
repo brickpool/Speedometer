@@ -17,7 +17,7 @@ Grundsätzlich funktionieren die drei für die Ladekontrollanzeige verwendeten E
 - Wenn die Spannung am _Trigger_-Pin 2 weniger als die Hälfte der Referenzspannung vom _Control Voltage_-Pin 5 des IC's beträgt, wird das interne RS-FlipFlop gesetzt und der Ausgang _Output_-Pin 3 geht auf _High_ (Spannung erreicht fast Vcc: Kontolllampe leuchtet).
 - Wenn die Spannung am _Treshold_-Pin 6 mehr als die Referenzspannung vom _Control Voltage_-Pin 5 beträgt, wird das interne RS-FlipFlop zurückgesetzt und der Ausgang Pin 3 geht in den _Low_-Zustand (Spannung erreicht fast 0V: Kontolllampe erlischt).
 
-Der Pin _Control Voltage_ benötigt eine stabile Spannung, um die korrekten Umschaltpunkte für die zwei internen Komparatoren, welche zusätzlich mit den Pins _Trigger_ und _Treshold_ verbunden sind, zu erhalten. Eine mit Vorwiderstand angeschlossene Zenerdiode an Pin _Control Voltage_ könnte eine genügend genaue Spannungsreferenz liefern. Die integrierten Widerstände vom Timer sind jedoch genau genug, wenn eine stabile Versorgungsspannung genutzt wird. Die Referenzspannung am Pin _Control Voltage_ hat im unbeschalteten Zustand 2/3 von Vcc. Mit Vcc = 7,5 beträgt die Referenzspannung Vref = 5V.
+Der Pin _Control Voltage_ benötigt eine stabile Spannung, um die korrekten Umschaltpunkte für die zwei internen Komparatoren, welche zusätzlich mit den Pins _Trigger_ und _Treshold_ verbunden sind, zu erhalten. Eine mit Vorwiderstand angeschlossene Zenerdiode an Pin _Control Voltage_ könnte eine genügend genaue Spannungsreferenz liefern. Die integrierten Widerstände vom Timer sind jedoch genau genug, wenn eine stabile Versorgungsspannung genutzt wird. Die Referenzspannung am Pin _Control Voltage_ hat im unbeschalteten Zustand 2/3 von Vcc. Mit Vcc = 5,1V beträgt die Referenzspannung Vref = 3,4V.
 
 Der Einsatz des Kondensator C5 schafft Abhilfe gegen Störungen beim Wechsel vom Zustand _High_ in den Zustand _Low_. Aufgabe der PNP-Schaltstufe war es, die Versorgungsspannung zu schalten. Der Ausgangsstrom des _Timer_-Bausteins reicht ausreicht, um den Kontrollanzeige zum Leuchten zu bringen. Das Datenblatt verrät, dass der maximale Ausgangstrom beim TLC555 bis zu 15 mA betragen darf. Sollte der Ausgang sogar gegen Masse oder die Betriebsspannung _kurzgeschlossen_ sein, fließt der eben genannte Strom aus den Ausgangspin und die Spannung bricht zusammen bzw. es dürfen bis zu 150mA in den Ausgangspin fließen. 
 
@@ -27,27 +27,27 @@ Der Spannungsteiler bestehend aus R1 und R2+R3 wird so ausgelegt und an _Treshol
 
 ![Kontrollanzeige 555 Abb.2](../images/Kontrollanzeige_mit_555_2.png)
 
-Der Widerstand R3 wird einfach festgelegt. Betreffs der Größe vom Widerstand R3 kommt es ganz auf die Anwendung an. In der Praxis eignen sich gut Werte von 10k bis 100k. Der Widerstand R3 wird mit 33k festgelegt. Die Untere Schaltschwelle soll bei ca. 11,9V und die obere bei ca. 13,4V liegen. Der Widerstand R2 wird Anhand der Hysterese (13,4V - 11,9V) nach folgender Formel berechnet:
+Der Widerstand R3 wird einfach festgelegt. Betreffs der Größe vom Widerstand R3 kommt es ganz auf die Anwendung an. In der Praxis eignen sich gut Werte von 10k bis 100k. Der Widerstand R3 wird mit 20k festgelegt. Die untere Schaltschwelle soll bei ca. 11,9V und die obere bei ca. 13,4V liegen. Der Widerstand R2 wird Anhand der Hysterese (13,4V - 11,9V) nach folgender Formel berechnet:
 
     R2 = R3 * (2 * V0(low) / V0(high) - 1)
-    R2 = 33k * (2 * 11,9V / 13,4V - 1)
-    R2 = 25,6k
+    R2 = 20k * (2 * 11,9V / 13,4V - 1)
+    R2 = 15,2k
 
-Der nächst passende Wert für R2 beträgt 27k. Der Widerstand R1 wird unter Verwendung der Referenzspannung (Vref = 5V) sowie R2 und R3 über die folgende Formel berechnet:
+Der nächst passende Wert für R2 beträgt 15k. Der Widerstand R1 wird unter Verwendung der Referenzspannung (Vref = 3,4V) sowie R2 und R3 über die folgende Formel berechnet:
 
     R1 = R3 * (2 * V0(low) / Vref - 1) - R2
-    R1 = 33k * (2 * 11,9V / 5V - 1) - 27k
-    R1 = 97,1k
+    R1 = 20k * (2 * 11,9V / 3,4V - 1) - 15k
+    R1 = 103,8k
 
-Für den Widerstand R1(+R6) wird ein Wert von 100k(+1k) genommen, dieser definiert mit den oben genannten Widerständen R2 und R3 die nun _tatsächlichen_ Umschaltpunkte 12,1V (_Low_) und 13,3V (_High_). Für die Bestimmung der realen Umschaltpunkte können folgende Formeln genutzt werden:
+Für den Widerstand R1 wird ein Wert von 103,3k (R1a + R1b = 100k + 3,3k) genommen. Dieser definiert mit den oben genannten Widerständen R2 und R3 die nun _tatsächlichen_ Umschaltpunkte 11,8V (_Low_) und 13,4V (_High_). Für die Bestimmung der realen Umschaltpunkte können folgende Formeln genutzt werden:
 
     V(low) = Vref * (R1 + R2 + R3) / (R2 + R3)
-    V(low) = 5V * (100k + 27k + 33k) / (27k + 33k)
-    V(low) = 12,1V
+    V(low) = 3,4V * (103,3k + 15k + 20k) / (15k + 20k)
+    V(low) = 11,8V
 
     V(high) = Vref / 2 * (R1 + R2 + R3) / R3
-    V(high) = 5V / 2 * (100k + 27k + 33k) / 33k
-    V(high) = 13,3V
+    V(high) = 3,4V / 2 * (103,3k + 15k + 20k) / 20k
+    V(high) = 13,4V
 
 ## Erweiterung Öldruckkontrollanzeige
 Die Kontrollanzeige _La1_ soll (wie bei der Diskret aufgebauten Schaltung auch) bei Verlust des Öldrucks ebenfalls zur Anzeige kommen. Die Anschaltung des Sensors (Schalten der Masse bei Öldruckverlust) erfolgt entweder einfach an dem _Trigger_ Eingang vom _Timer_-Baustein oder am Ausgang mittels geeigneter Logik bestehend aus Transisor und Dioden (abgek. [DTL](http://de.wikipedia.org/wiki/Diode-Transistor-Logik)).
