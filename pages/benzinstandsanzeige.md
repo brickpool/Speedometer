@@ -12,7 +12,7 @@ Aufgrund der Kaltleitereigenschaft einer Glühlampe kommt es zu einem zügigen U
 
 Die Bauteile unterliegen zwar einer Exemplarstreuung, doch durch die venwendete kombination aus Heißleiter-Sensor und Glühlampen-Kaltleiter kann eine sehr steile Kennlinie für einen bestimmten Temperaturbereich erzielt werden. 
 
-Es wurde folgende Messwerte (bei einer Batteriespannung von 12,6V) aufgenommen:
+Es wurden folgende Messwerte (bei einer Batteriespannung von 12,6V) aufgenommen:
 
 Tank | Strom | Spannung am Geber | Spannung a.d. Glühlampe
 ---- | ----- | ----------------- | --------------------------
@@ -26,21 +26,15 @@ Wie bereits weiter oben beschrieben verhält sich der Benzinstandsgeber der Duca
 
 ![Benzinstandsanzeige](../images/Benzinstandsanzeige_2.png)
 
-Der Invertierende [Schmitt-Trigger](http://de.wikipedia.org/wiki/Schmitt-Trigger) wird mit Hilfe eines Komparators ([LM293.pdf](http://www.ti.com/lit/ds/symlink/lm393a.pdf)) realisiert.
+Die Benzinstandsanzeige wird mit Hilfe eines zweistufig invertierenden Schaltverstärker realisiert. Das Eingangssignal wird mittels eines Spannungsteilers an die Basis des Transistors der ersten Schaltstufe angelegt. Die Umschaltspannung soll bei Vu = 3V liegen. Das Verhältnis zwischen Vu und Vbe (= 0,7V) bestimmt das Verhältnis der Widerstandswerte:
 
-Die Referenzspannung wird mittels einer Z-Diode von 4,3V über einen Eingangswiderstand am positiven Eingang des Komperators angelegt. Ein zusätzlicher Widerstand (hier 330k) sorgt für die Mitkopplung und damit für die Hysterese welche im Verhältnis zum Einsgangswiderstand berechnet wird (bei Single Supply und Rh >> R(pullup)).
+    R1 = R2 * (Vu/Vbe - 1)
+       = 3,3k * (3V/0,7V - 1)
+       = 10k
 
-    R(hys) = Re * (Vcc/(V(high)-V(low)) - 1)
+Mit einem Eingangswiderstandswert von 10k und einem Widerstand von 3,3k gegen Masse fließt bei Nutzung einer Versorgungsspannung von Vbat = 8..35V ein ausreichend großer aber nicht zu großer Basisstrom durch den Transistor der ersten Schaltstufe. Sobald am Eingang die Spannung von 3V unterschritten wird, sperrt der Transistor und am Ausgang liegt der 100 Ohm Widerstand über den Transistor der zweiten Stufe gegen Masse. Sofern die 3V überschritten werden leitet der Transistor der ersten Stufe und der Transitor der zweiten Stufe sperrt. Der Ausgang ist somit unbeschaltet.
 
-Um die Hysterese Anhand der Widerstandswerte zu berechnen kann folgende vereinfachte Formel verwendet werden (Single Supply, Rh >> R(pullup) und Vref = Vcc/2):
-
-    V(hys) = Vref * Re/(Re + R(hys)) = V(high) - V(low)
-
-Mit einem Eingangswiderstandswert von 33k und einem Widerstand von 330k für die Hysterese, wird bei Nutzung einer Versorgungsspannung von Vcc = 8,6V und einer Referenzspannung von 4,3V folgendes Verhalten erzielt:
-- Sobald am Eingang die Spannung von 3,9V unterschritten wird (Vin < V(low)), geht der Komperator in die positive Sättigung und der NPN Transistor leitet. Am Ausgang liegt ein 10 Ohm Widerstand gegen Masse.
-- Sofern 4,7V überschritten werden (Vin > V(high)), geht der Komperator in die negative Sättigung und der Transitor sperrt. Der Ausgang ist somit unbeschaltet.
-
-Die in Serie geschaltete Schottky Diode BAT41 und Kleinsignaldiode 1N4148 dienen als Strombegrenzung (ca. 30mA) für den 10 Ohm Widerstand, sprich den über Ausgang _Out_ zugeführten Strom.
+Die 3,3V Z-Diode dient als Strombegrenzung (ca. 25-30mA) für den 100 Ohm Widerstand, sprich den über Ausgang _Out_ zugeführten Strom.
 
 ## Quellen und weiterführende Literatur
 
