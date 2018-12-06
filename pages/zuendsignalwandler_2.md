@@ -83,4 +83,4 @@ In der fertigen Schaltung wird zusätzlich noch ein Stützkondensator C8 von 100
 ](http://www.incbtech.com/index.php/circuit-bench/58-converters/168-voltage-controlled-oscillator-vco-using-the-4046-cb109)
 
 ### Nächste Seite
-Weiter geht's mit [KFZ-Versorgungsspannung](versorgungsspannung.html).
+Weiter geht's mit [Zündsignalwandler Teil 3](zuendsignalwandler_3.html).
