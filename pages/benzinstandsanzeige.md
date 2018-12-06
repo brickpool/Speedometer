@@ -22,17 +22,21 @@ leer | 78mA  | 2,2V              | 10,4V (Kontrollleuchte an)
 ## Tanklevelanzeige
 Die Tanklevelanzeige vom Kombiinstrument arbeitet auf Widerstandbasis. Zur Bestimmung des Widerstanswerte misst das Instrument die Spannung bei einem vorgegebenen konstanten Strom.
 
-Wie bereits weiter oben beschrieben verhält sich der Benzinstandsgeber der Ducati nicht wie ein _Widerstandsgeber_, sondern eher wie ein _Schalter_. Die folgende Schaltung kann daher nur die beiden Zuständen **leer** (Balkenanzeige blinkt, entspricht Widerstand unendlich) oder **voll** (volle Balkenanzeige, Widerstand 10 Ohm) anzeigen. 
+Wie bereits weiter oben beschrieben verhält sich der Benzinstandsgeber der Ducati nicht wie ein _Widerstandsgeber_, sondern eher wie ein _Schalter_. Die folgende Schaltung kann daher nur die beiden Zuständen **leer** (Balkenanzeige blinkt, entspricht Widerstand unendlich) oder **voll** (volle Balkenanzeige, Widerstand 100 Ohm) anzeigen. 
 
 ![Benzinstandsanzeige](../images/Benzinstandsanzeige_2.png)
 
-Die Benzinstandsanzeige wird mit Hilfe eines zweistufig invertierenden Schaltverstärker realisiert. Das Eingangssignal wird mittels eines Spannungsteilers an die Basis des Transistors der ersten Schaltstufe angelegt. Die Umschaltspannung soll bei Vu = 3V liegen. Das Verhältnis zwischen Vu und Vbe (= 0,7V) bestimmt das Verhältnis der Widerstandswerte:
+Die Benzinstandsanzeige wird mit Hilfe eines zweistufig invertierenden Schaltverstärker realisiert. Das Eingangssignal wird mittels eines Spannungsteilers an die Basis des Transistors der ersten Schaltstufe angelegt. Die Umschaltspannung Vu liegt bei ca. 3V. In Abhängigkeit von der Eingangsspannung wird folgendes Verhalten erzielt: 
+- Sobald am Eingang die Spannung von 3V unterschritten wird (Vin < Vu), sperrt der Transistor und am Ausgang liegt der 100 Ohm Widerstand über den Transistor der zweiten Stufe gegen Masse.
+- Sofern die 3V überschritten werden (Vin > Vu) leitet der Transistor der ersten Stufe und der Transitor der zweiten Stufe sperrt. Der Ausgang ist somit unbeschaltet.
+
+Das Verhältnis zwischen Vu und Vbe (= 0,7V) bestimmt das Verhältnis der Widerstandswerte vom Eingangsspannungteiler:
 
     R1 = R2 * (Vu/Vbe - 1)
        = 3,3k * (3V/0,7V - 1)
        = 10k
 
-Mit einem Eingangswiderstandswert von 10k und einem Widerstand von 3,3k gegen Masse fließt bei Nutzung einer Versorgungsspannung von Vbat = 8..35V ein ausreichend großer aber nicht zu großer Basisstrom durch den Transistor der ersten Schaltstufe. Sobald am Eingang die Spannung von 3V unterschritten wird, sperrt der Transistor und am Ausgang liegt der 100 Ohm Widerstand über den Transistor der zweiten Stufe gegen Masse. Sofern die 3V überschritten werden leitet der Transistor der ersten Stufe und der Transitor der zweiten Stufe sperrt. Der Ausgang ist somit unbeschaltet.
+Mit einem Eingangswiderstandswert von 10k und einem Widerstand von 3,3k gegen Masse fließt bei Nutzung einer Versorgungsspannung von Vbat = 8..35V und bei Vin > Vu ein ausreichend großer aber nicht zu großer Basisstrom durch den Transistor der ersten Schaltstufe.
 
 Die 3,3V Z-Diode dient als Strombegrenzung (ca. 25-30mA) für den 100 Ohm Widerstand, sprich den über Ausgang _Out_ zugeführten Strom.
 
