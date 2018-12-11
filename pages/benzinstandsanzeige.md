@@ -6,9 +6,9 @@ description: Universal LCD Motorrad Tachometer
 
 Die Guzzi besitzt keinen Geber und keine Reservelampe. Ein offener Anschluss und Werte größer 90 bzw. 500 Ohm bringen die Füllstandsanzeige des Kombiinstrumentes zum Blinken. Der Anschluss für die Tankanzeige muss daher passend beschaltet werden, da sonst eine blinkende Tankanzeige am Instrument stört. Die einfachste Methode ist es, dass Instrument auf einen Sensor von 500 Ohm umzuprogrammieren und mittels 470 Ohm Widerstand den Anschluss für die Tankanzeige gegen Masse zu schalten. Es wird dann nur der untere Balken angezeigt.
 
-Die Ducati Monster verwendet ein Heißleiter (abk. NTC) als Benzinstandgeber. Der Sensor wird bei ausreichend gefüllten Tank vom Benzin umflossen und ist dadurch kalt. Der innenliegende Heißleiter leitet somit schlecht und verhindert so das Einschalten der zugehörigen Kontrolllampe im Original-Instrument. Sofern der Sensor nicht ausreichend von Benzin umgeben ist, erwärmt sich der Heißleiter (langsam) durch den Stromfluss und verliert (almählich) seinen hohen Anfangswiderstand.
+Die Ducati Monster verwendet ein [Heißleiter](https://de.wikipedia.org/wiki/Hei%C3%9Fleiter) (abk. NTC) als Benzinstandgeber. Der Sensor wird bei ausreichend gefüllten Tank vom Benzin umflossen und ist dadurch kalt. Der innenliegende Heißleiter leitet somit schlecht und verhindert so das Einschalten der zugehörigen Kontrolllampe im Original-Instrument. Sofern der Sensor nicht ausreichend von Benzin umgeben ist, erwärmt sich der Heißleiter (langsam) durch den Stromfluss und verliert (almählich) seinen hohen Anfangswiderstand.
 
-Aufgrund der Kaltleitereigenschaft einer Glühlampe kommt es zu einem zügigen Umschalten, sofern die Glühwendel auf Betriebstemperatur aufgeheizt ist. Mit steigender Temperatur erhöht sich der elektrische Widerstand und somit der Spannungsabfall an der Glühlampe, womit die Glühlampe die volle elektrische Leistung erhält. 
+Aufgrund der [Kaltleitereigenschaft einer Glühlampe](http://de.wikipedia.org/wiki/Kaltleiter#Metalle) kommt es zu einem zügigen Umschalten, sofern die Glühwendel auf Betriebstemperatur aufgeheizt ist. Mit steigender Temperatur erhöht sich der elektrische Widerstand und somit der Spannungsabfall an der Glühlampe, womit die Glühlampe die volle elektrische Leistung erhält. 
 
 Die Bauteile unterliegen zwar einer Exemplarstreuung, doch durch die venwendete kombination aus Heißleiter-Sensor und Glühlampen-Kaltleiter kann eine sehr steile Kennlinie für einen bestimmten Temperaturbereich erzielt werden. 
 
@@ -26,27 +26,29 @@ Wie bereits weiter oben beschrieben verhält sich der Benzinstandsgeber der Duca
 
 ![Benzinstandsanzeige](../images/Benzinstandsanzeige_2.png)
 
-Die Benzinstandsanzeige wird mit Hilfe eines zweistufig invertierenden Schaltverstärker realisiert. Das Eingangssignal wird mittels eines Spannungsteilers an die Basis des Transistors der ersten Schaltstufe angelegt. Die Umschaltspannung Vu liegt bei ca. 3V. In Abhängigkeit von der Eingangsspannung wird folgendes Verhalten erzielt: 
-- Sobald am Eingang die Spannung von 3V unterschritten wird (Vin < Vu), sperrt der Transistor und am Ausgang liegt der 100 Ohm Widerstand über den Transistor der zweiten Stufe gegen Masse.
-- Sofern die 3V überschritten werden (Vin > Vu) leitet der Transistor der ersten Stufe und der Transitor der zweiten Stufe sperrt. Der Ausgang ist somit unbeschaltet.
+Die Benzinstandsanzeige wird mit Hilfe eines zweistufig invertierenden Schaltverstärker realisiert. Das Eingangssignal wird mittels eines [Spannungsteilers](https://de.wikipedia.org/wiki/Spannungsteiler) bestehend aus NTC und Widerstand R4 an den Diodeneingang der invertierenden Schaltstufe ([DTL-Logik](http://de.wikipedia.org/wiki/Diode-Transistor-Logik)) angelegt. D2 dient dem Schutz bei negativen Spannungen und Z1 dem anheben des High-Pegels. Der Widerstandswert R4 errechnet sich aus den gemessenen Wert bei leerem Tank (siehe oben):
 
-Das Verhältnis zwischen Vu und Vbe (= 0,7V) bestimmt das Verhältnis der Widerstandswerte vom Eingangsspannungteiler:
+    R4 = U(R4) / I(R4)
+       = 10,4V / 0,078A
+       = 133 Ohm
 
-    R1 = R2 * (Vu/Vbe - 1)
-       = 3,3k * (3V/0,7V - 1)
-       = 10k
+Um die abzuführende Leistung gering zu halten, wird ein Wert von 180 Ohm genutzt. Die maximale Leistung bei direktem Anschluß an Ubat = 15V beträgt 1,25 Watt.  
 
-Mit einem Eingangswiderstandswert von 10k und einem Widerstand von 3,3k gegen Masse fließt bei Nutzung einer Versorgungsspannung von Vbat = 8..35V und bei Vin > Vu ein ausreichend großer aber nicht zu großer Basisstrom durch den Transistor der ersten Schaltstufe.
+Die Umschaltspannung Uu von 3,3V wird durch Nutzung der Z-Diode Z1 festgelegt. In Abhängigkeit von der Eingangsspannung wird folgendes Verhalten erzielt: 
+- Sobald am Eingang die Spannung von 3,3V unterschritten wird (Uin < Uu), sperrt der Transistor und am Ausgang liegt der 100 Ohm Widerstand über den Transistor der zweiten Stufe gegen Masse.
+- Sofern die 3,3V überschritten werden (Uin > Uu) leitet der Transistor der ersten Stufe und der Transitor der zweiten Stufe sperrt. Der Ausgang ist somit unbeschaltet.
 
-Die 3,3V Z-Diode dient als Strombegrenzung (ca. 25-30mA) für den 100 Ohm Widerstand, sprich den über Ausgang _Out_ zugeführten Strom.
+Mit einem Eingangswiderstandswert von 10k und einem Widerstand von 6,8k gegen Masse fließt mit Ubat = 10V bis 15V und bei Uin > Uu ein ausreichend großer Basisstrom über R1 zum Transistor der ersten Schaltstufe, um die direkt angekoppelte Schaltstufe ([DCTL](http://en.wikipedia.org/wiki/Direct-coupled_transistor_logic)) bestehend aus R3 und T2 sicher zu schalten. Die Z-Diode Z2 zwischen Basis und Emitter von T2 dient als Strombegrenzung (ca. 26mA) bei Anwendung eines 100 Ohm Widerstandes für die Füllstandsanzeige. Die maximale Leitung für T2 bei direktem Anschluss des _Out_ Ausganges an Ubat = 15V beträgt :
+
+    P(T2) = (Ubat_max - Uz + Ube) * I_max
+          = (15V - 3,3V + 0,7V) * 26mA
+          = 286 mW
 
 ## Quellen und weiterführende Literatur
 
 ### Links
 - Duc-Forum.de; [Tankkontrollleuchte LED für alte SS/Monster funzt](http://www.duc-forum.de/thread.php?threadid=71131)
-- Wikipedia; [Heißleiter](https://de.wikipedia.org/wiki/Hei%C3%9Fleiter)
 - Wikipedia; [Elektrische Eigenschaften einer Glühlampe](https://de.wikipedia.org/wiki/Gl%C3%BChlampe#Elektrische_Eigenschaften)
-- ElectronicsTutorials; [OPV-Komparator](https://www.electronics-tutorials.ws/de/operationsverstarker/opamp-komparator.html)
 
 ### Nächste Seite
 Weiter geht's mit [Zündsignalwandler](zuendsignalwandler_1.html).
