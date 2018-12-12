@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Lade- und Öldruckkontrollanzeige
+title: Ladekontrollanzeige
 description: Universal LCD Motorrad Tachometer
 ---
 
@@ -43,9 +43,9 @@ Bei einer Versorgungsspannung von 10-15V und einem Widerstand R3 von ca. 10kOhm 
 ## Schalten der Versorgungsspannung
 Die Kontrollleuchte ist im Instrument gegen Masse geschaltet. Sie erfordert also das schalten Versorgungsspannung. Da dies weiterhin elektronisch passieren soll, nutzen wir hierzu ein PNP-Transistor. Hier liegt der Emitter an der Versorgungsspannung vom Fahrzeug (Kl. 30).
 
-Zur Anwendung kommt ein Transistor Typ BC557B (Datenblatt: [BC560.pdf](https://www.fairchildsemi.com/ds/BC/BC560.pdf)) der die Kontrollleuchte La1 bei 12V mit einer gemessenen Last von 2,7kOhm schalten soll. Vorteil des Transistors hier ist, dass der Spannungsabfall Uce(sat) am Transistor bei _Durchschaltung_ nur ca. 0,3V bis 0,65V beträgt. 
-
 ![Schalten der Versorgungsspannung Abb. 1](../images/Schalten_der_Versorgungsspannung_1.png)
+
+Zur Anwendung kommt ein Transistor Typ BC557B (Datenblatt: [BC560.pdf](https://www.fairchildsemi.com/ds/BC/BC560.pdf)) der die Kontrollleuchte La1 bei 12V mit einer gemessenen Last von 2,7kOhm schalten soll. Vorteil des Transistors hier ist, dass der Spannungsabfall Uce(sat) am Transistor bei _Durchschaltung_ nur ca. 0,3V bis 0,65V beträgt. 
 
 Die Steuerspannungen Ube am Transistor bezieht sich bei einem PNP-Transistor auf die positive Versorgungsspannung und nicht auf Masse. Ein PNP immer schaltet dann durch, wenn Vbe die Schaltschwelle unterschreiten, also Uin um Ube kleiner ist als die Spannung Ue am Emitter.
 
@@ -71,11 +71,12 @@ Für unseren Anwendungsfall verwenden wir für R7 ein Widerstand von 10kOhm der 
 
 Damit die Transistorstufe zuverlässig arbeitet, kommt zusätzlich der Widerstand R6 zu Anwendung. Er vermeidet, dass der Transistor bei offenenem Eingang durch Störeinstrahlung teilweise leitet, indem er den Basisanschluss auf die Versorgungsspannung vorspannt, so dass der Transistor sperrt. In unserem im Anwendungsfall verwenden wir für R6 ein Widerstand von 2,2kOhm.
 
+### Strombegrenzung am Ausgang
+Da die Anschaltung von La1 erfolgt extern und der PNP-Transistor bei einer Fehlbeschaltung vom Kollektor nicht zerstört wird, wird eine Strombegrenzung eingebracht.
+
 ![Schalten der Versorgungsspannung Abb. 2](../images/Schalten_der_Versorgungsspannung_2.png)
 
-Da die Anschaltung von La1 erfolgt extern und der PNP-Transistor bei einer Fehlbeschaltung vom Kollektor nicht zerstört wird, wird eine Strombegrenzung eingebracht. Widerstand R8 und Z-Diode begrenzen den maximalen Kollektorstrom Ic(max) von La1 z.B bei _Kurzschluss_. 
-
-Die Z-Diode bewirkt, dass an der Basis von T2 nur eine maximale Spannung von Uf = 3,3V erreicht werden kann. Die zugehörige Basis-Emitter-Spannung Vbe von T2 wird mit 0,7V angesetzt. Der maximale Strom wird erreicht, wenn der Spannungsabfall an R8 den Wert von 2,6V (Uf - Ube) erreicht. Der Widerstand R8, für einen vorgebenen maximalen Strom von 25mA, lässt sich wie folgt berechnen:
+Widerstand R8 und Z-Diode begrenzen den maximalen Kollektorstrom Ic(max) von La1 z.B bei _Kurzschluss_. Die Z-Diode bewirkt, dass an der Basis von T2 nur eine maximale Spannung von Uf = 3,3V erreicht werden kann. Die zugehörige Basis-Emitter-Spannung Vbe von T2 wird mit 0,7V angesetzt. Der maximale Strom wird erreicht, wenn der Spannungsabfall an R8 den Wert von 2,6V (Uf - Ube) erreicht. Der Widerstand R8, für einen vorgebenen maximalen Strom von 25mA, lässt sich wie folgt berechnen:
 
     R8(min) = (Uf - Ube) / Ic(max) = 3,3V – 0,7V / 25mA = 104 Ohm
 
@@ -138,4 +139,4 @@ Eine solche Schaltung wird als (nicht-invertierender) [Schmitt-Trigger](https://
 - Mikrocontroller.net; [Unterspannungsabschaltung gesucht](http://www.mikrocontroller.net/topic/340319#3744991)
 
 ### Nächste Seite
-Weiter geht's mit [Lade- und Öldruckkontrollanzeige mit CMOS](kontrollanzeige_2.html).
+Weiter geht's mit [Öldruckkontrollanzeige](kontrollanzeige_2.html).

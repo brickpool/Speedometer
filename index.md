@@ -107,4 +107,4 @@ Das Signal für den Drehzahlmesser kommt von Klemme 1 der Zündspule über einen
 - Banggood.com; [12000RMP LCD Digital Speedometer Odometer Motorcycle 1-4 Cylinders](http://www.banggood.com/en/12000-RMP-LCD-Digital-Speedometer-Odometer-Motorcycle-1-4-Cylinders-p-972677.html)
 
 ### Nächste Seite
-Weiter geht's mit [Lade- und Öldruckkontrollanzeige](pages/kontrollanzeige_1.html).
+Weiter geht's mit [Ladekontrollanzeige](pages/kontrollanzeige_1.html).
