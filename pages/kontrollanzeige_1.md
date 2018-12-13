@@ -49,27 +49,27 @@ Zur Anwendung kommt ein Transistor Typ BC557B (Datenblatt: [BC560.pdf](https://w
 
 Die Steuerspannungen Ube am Transistor bezieht sich bei einem PNP-Transistor auf die positive Versorgungsspannung und nicht auf Masse. Ein PNP immer schaltet dann durch, wenn Vbe die Schaltschwelle unterschreiten, also Uin um Ube kleiner ist als die Spannung Ue am Emitter.
 
-Der Basiswiderstand R7 berechnet sich aus (Ubat-Ube) / Ib. Im Datenblatt findet sich für den BC557 Typ **B** eine Gleichspannungsverstärkung von 200. Mit einem Überbuchungsfaktor ü = 3 erhält man die Stromverstärkung Ic/Ib von 200/3 = 66. Da nur kleine Ströme fließen (Ic < 10 mA und somit Ib < 0,5 mA) wird Uce(sat) mit dem im Datenblatt zugehörigen angegeben Wert von 0,3V angesetzt.
+Der Basiswiderstand R6 berechnet sich aus `(Ubat-Ube) / Ib`. Im Datenblatt findet sich für den BC557 Typ **B** eine Gleichspannungsverstärkung von 200. Mit einem Überbuchungsfaktor ü = 3 erhält man die gewünschte Stromverstärkung `Ic/Ib` von `200/3 = 66`. Da nur kleine Ströme fließen (Ic < 10 mA und somit Ib < 0,5 mA) wird Uce(sat) mit dem im Datenblatt zugehörigen angegeben Wert von 0,3V angesetzt.
 
-Die Versorgungsspannung vom Instrument beträgt 10V bis 15V. Etwa 0,7V fallen an der Basis-Emitter-Strecke Ube ab (bei Ic = 10mA), also wird bei einer niedrigen Versorgungsspannung von 10V für eine vernünftige Durchschaltung ein passender Widerstand R7 benötigt.
+Die Versorgungsspannung vom Instrument beträgt 10V bis 15V. Etwa 0,7V fallen an der Basis-Emitter-Strecke Ube ab (bei Ic = 10mA), also wird bei einer niedrigen Versorgungsspannung von 10V für eine vernünftige Durchschaltung ein passender Widerstand R6 benötigt.
 
     Ib(min) = Ic(min) / 66
             = 10 mA / 66
             = 0,15mA
 
-    R7(max) = Ubat(min) – Ube / Ib(min)
+    R6(max) = Ubat(min) – Ube / Ib(min)
             = (10V – 0,7V) / 0,15mA
             = 62kOhm
 
-Der höchst zulässige Kollektorstrom Ic für den Transistortyp beträgt max. 100mA mit einem zugehörigen Basisstrom Ib von 5mA (siehe Datenblatt). In dem Sättigungsbereich fallen bei hohen Strömen an der Basis-Emitter-Strecke 0,9V ab. Bei Versorgungsspannung von 15V ist der hierzu notwendige Basiswiderstand R7 ebenfalls zu berechnen.
+Der höchst zulässige Kollektorstrom Ic für den Transistortyp beträgt max. 100mA mit einem zugehörigen Basisstrom Ib von 5mA (siehe Datenblatt). In dem Sättigungsbereich fallen bei hohen Strömen an der Basis-Emitter-Strecke 0,9V ab. Bei Versorgungsspannung von 15V ist der hierzu notwendige Basiswiderstand R6 ebenfalls zu berechnen.
 
-    R7(min) = Umax – Ube / Ib(max)
+    R6(min) = Umax – Ube / Ib(max)
             = (15V – 0,9V) / 5mA
             = 2,8kOhm
 
-Für unseren Anwendungsfall verwenden wir für R7 ein Widerstand von 10kOhm der einen Basisstrom von ca. 0,9mA (bei 10V) bis 1,4mA (bei 15V) hervorruft.
+Für unseren Anwendungsfall verwenden wir für R6 ein Widerstand von 10kOhm der einen Basisstrom von ca. 0,9mA (bei 10V) bis 1,4mA (bei 15V) hervorruft.
 
-Damit die Transistorstufe zuverlässig arbeitet, kommt zusätzlich der Widerstand R6 zu Anwendung. Er vermeidet, dass der Transistor bei offenenem Eingang durch Störeinstrahlung teilweise leitet, indem er den Basisanschluss auf die Versorgungsspannung vorspannt, so dass der Transistor sperrt. In unserem im Anwendungsfall verwenden wir für R6 ein Widerstand von 2,2kOhm.
+Damit die Transistorstufe zuverlässig arbeitet, kommt zusätzlich der Widerstand R7 zu Anwendung. Er vermeidet, dass der Transistor bei offenenem Eingang durch Störeinstrahlung teilweise leitet, indem er den Basisanschluss auf die Versorgungsspannung vorspannt, so dass der Transistor sperrt. In unserem im Anwendungsfall verwenden wir für R7 ein Widerstand von 6,8kOhm. Der Eingang erhält noch eine zusätzliche Entkopplungsdiode D3.
 
 ### Strombegrenzung am Ausgang
 Da die Anschaltung von La1 erfolgt extern und der PNP-Transistor bei einer Fehlbeschaltung vom Kollektor nicht zerstört wird, wird eine Strombegrenzung eingebracht.
@@ -116,7 +116,7 @@ Der _Messtufe_ wird bei minimalen Über- oder Unterschreiten der Referenzspannun
 
 Die Erzeugung dieser Schalthysterese kann mit Hilfe einer Mitkopplung erreicht werden. In unserem Fall indem ein Teil der Ausgangsspannung von der _Inverterstufe_ an den Eingang Ref der _Messtufe_ zurückgeführt wird. Dazu wird lediglich ein Widerstand (R9) benötigt.
 
-Eine solche Schaltung wird als (nicht-invertierender) [Schmitt-Trigger](https://de.wikipedia.org/wiki/Schmitt-Trigger) bezeichnet. Berechnet wird die Hysterese durch Nutzung folgender Formeln (bei Uin = Ubat und unter Vernachlässigung von R6 weil R9 >> R6):
+Eine solche Schaltung wird als (nicht-invertierender) [Schmitt-Trigger](https://de.wikipedia.org/wiki/Schmitt-Trigger) bezeichnet. Berechnet wird die Hysterese durch Nutzung folgender Formeln (bei Uin ca. Ubat und unter Vernachlässigung von R5, weil R9 viel größer R5):
 
     U(low) = Uref * (R1||R9 + R2) / R2
            = (Uz + Ube) * (R1/R2 * R9/(R1+R9) + 1)
