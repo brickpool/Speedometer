@@ -29,7 +29,7 @@ Für einen Kollektorstrom von ca. 1mA wird nur ein schwacher Eingangsbasisstrom 
         = (1 + 22k/8,2k) * 3,4V
         = 12,5V
 
-![Messen der Spannung an Kl.61 Abb. 1](../images/Messung_Spannung_Kl.61_1.png)
+![Messen der Spannung an Kl.61](../images/Messung_Spannung_Kl.61.png)
 
 Zum Schutz vor positiven und negativen Spannungsspitzen werden zusätzlich Dioden vom Typ 1N4148 am Punkt Uref eingesetzt.
 
