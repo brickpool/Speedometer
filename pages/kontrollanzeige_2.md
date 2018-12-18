@@ -37,12 +37,12 @@ Die Flankensteilheit der positiven Flanke kann verbessert werden, indem man den 
     R4 = R4a||R4a = 10k
     R4a = R4b = 20k
 
-Der Öldrucksensor schaltet gegen Masse bei Öldruckverlust. Die Anschaltung und Aktivierung des Multivibrators erfolgt mittels geeigneter Transisor-Logik. Der PNP-Transistoren T3 dient zusammen mit Widerstand R5 als invertierende Schaltstufe, um den Transistor T2 _freizugeben_. D4 dient zum Schutz vor Überspannung und D5 schützt den Transsitor T3 vor negativen Spannungen. Da die Basis vom Transistor T3 im Ruhezustand unbeschaltet ist, kommt R6 zum Einsatz.
+Der Öldrucksensor schaltet gegen Masse bei Öldruckverlust. Die Anschaltung und Aktivierung des Multivibrators erfolgt mittels geeigneter Transisor-Logik. Der PNP-Transistoren T3 dient zusammen mit Widerstand R5 als invertierende Schaltstufe, um den Multivibrator _freizugeben_. D4 dient zum Schutz vor Überspannung und D5 schützt den Transsitor T3 vor negativen Spannungen. Da die Basis vom Transistor T3 im Ruhezustand unbeschaltet ist, kommt R6 zum Einsatz.
 
 ![Astabile Kippstufe Abb. 2](../images/Astabile_Kippstufe_2.png)
 
 ## Gesamtschaltung Öldruckkontrollanzeige
-Die gesamte Schaltung erhält noch die bereits verwendete Schaltstufe zur Anschaltung der Kontrollampe La1 (siehe [hier](kontrollanzeige_1.html)). Der Abgriff erfolgt nicht direkt sondern über eine Entkopplungsdiode.
+Die gesamte Schaltung erhält noch die bereits verwendete Schaltstufe zur Anschaltung der Kontrollampe La1 (siehe [hier](kontrollanzeige_1.html)). Der Abgriff erfolgt nicht direkt sondern an der Entkopplungsdiode.
 
 ![Gesamtschaltung Öldruckkontrollanzeige](../images/Oeldruckkontrollanzeige.png)
 

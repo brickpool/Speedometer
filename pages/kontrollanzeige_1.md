@@ -12,28 +12,16 @@ Die Kontrollleuchte soll immer zur Anzeige kommen, wenn mehr Strom der Batterie 
 
 Die Guzzi bzw. Ducati besitzt darüber hinaus eine Öldruckanzeige. Der zugehörige Sensor wird bei Problemen gegen Masse geschaltet und bringt im Original im Instrument eine Lampe zur Anzeige, die an die Versorgungsspannung angeschlossen ist.
 
-Die folgende Beispielschaltung soll an einem Fahrzeug mit 12V-Netz eine Kontrollleuchte im Instrument ansteuern. Die Kontrollleuchte La1 wird bei einer Spannung von unter 12,6V (+/- 5%) an [Klemme 61](http://de.wikipedia.org/wiki/Klemmenbezeichnung#Beleuchtung) eingeschaltet. Zudem schaltet der Schalter S1 (geschaltet gegen Masse) ebenfalls die Kontrollleuchte.
+Die folgende Beispielschaltung soll an einem Fahrzeug mit 12V-Netz eine Kontrollleuchte im Instrument ansteuern. Die Kontrollleuchte La1 wird bei einer Spannung von unter 12,6V (+/- 5%) an [Klemme 61](http://de.wikipedia.org/wiki/Klemmenbezeichnung#Beleuchtung) eingeschaltet. 
 
-![Lade-/Öldruckkontrollanzeige](../images/Kontrollanzeige.png)
+![Ladekontrollanzeige](../images/Kontrollanzeige.png)
 
-## Messen der Spannung an Kl.61
-Im Internet gibt es hierzu Beispielschaltungen auf Basis eines NPN Transistor mit Z-Diode als Regeler. Die Schaltung arbeitet im Prinzip als einstellbare Z-Diode. Mit einem Spannungsteiler an Uref lässt sich stufenlos eine Spannung größer Uref einstellen. Die Referenzspannung Uref beträgt bei Nutzung einer Z-Dode von 2,7V und Ube von 0,7V (bei Ib = 10mA und Ib = 0,5mA) einen Wert von 3,4V:
-
-    Uref = Uz + Ube
-         = 2,7V + 0,7V
-         = 3,4V
-
-Für einen Kollektorstrom von ca. 1mA wird nur ein schwacher Eingangsbasisstrom Ib (abhängig vom Gleispannungsverstärkung des Transistor siehe Datenblatt) von ca. 20 bis 40 μA benötigt, daher sollten R1 und R2 im Bereich kOhm liegen. Ein Spannungsverteilerverhältnis aus der E24-Normwerten 22k und 8,2k bringt den Transistor bei Uin = 12,5V zum schalten. Die Werte lassen sich mit folgender Formel bestimmen: 
-
-    Uin = (1 + R1/R2) * Uref
-        = (1 + 22k/8,2k) * 3,4V
-        = 12,5V
+## Unterspannungserkennung der Spannung an Kl.61
+Die Schwellwertmessung auf Basis eines Differenzverstärkers. Die Schaltung arbeitet im Prinzip als Komperator. Die zu messende Spannung wird mit einem Spannungsteiler an den positiven Eingang des Differenzverstärkers angelegt. Die Referenzspannung Uref wird unter Nutzung einer Z-Dode von 6,2V und eines Vorwiderstand R5 an den negativen Eingang des Differenzverstärkers gelegt.
 
 ![Messen der Spannung an Kl.61](../images/Messung_Spannung_Kl.61.png)
 
-Zum Schutz vor positiven und negativen Spannungsspitzen werden zusätzlich Dioden vom Typ 1N4148 am Punkt Uref eingesetzt.
-
-Die Z-Diode soll bei allen Spannungen (Arbeitsbereich vom Instrument 10-15V) zuverlässig arbeitet. Um einen geringen Temperaturkoeffizient für eine Z-Diode von 2,7V zu erhalten (siehe Datenblatt) sollte R3 so dimensioniert sein, dass der Strom durch die Z-Diode ca. 1 mA beträgt. Zu beachten ist, dass die Regelschaltung mit Z-Diode die unpraktische Eigenschaft hat, dass die Spannung am Kollektor im durchgeschalteten Zustand nicht unter Uz sinken kann.
+Die Z-Diode soll bei allen Spannungen (Arbeitsbereich vom Instrument 10-15V) zuverlässig arbeitet. Um einen stabilen Temperaturkoeffizient für die Z-Diode zu erhalten (siehe Datenblatt) soll R5 so dimensioniert sein, dass der Strom durch die Z-Diode ca. 1 mA beträgt. 
 
     R3(max) = (Umin-Ube-Uz)/Iz = 10V-0,2V-2,7V / 1mA = 7,1kOhm
     R3(min) = (Umax-Ube-Uz)/Iz = 15V-0,2V-2,7V / 1mA = 12,1kOhm
@@ -69,7 +57,7 @@ Der höchst zulässige Kollektorstrom Ic für den Transistortyp beträgt max. 10
 
 Für unseren Anwendungsfall verwenden wir für R6 ein Widerstand von 10kOhm der einen Basisstrom von ca. 0,9mA (bei 10V) bis 1,4mA (bei 15V) hervorruft.
 
-Damit die Transistorstufe zuverlässig arbeitet, kommt zusätzlich der Widerstand R7 zu Anwendung. Er vermeidet, dass der Transistor bei offenenem Eingang durch Störeinstrahlung teilweise leitet, indem er den Basisanschluss auf die Versorgungsspannung vorspannt, so dass der Transistor sperrt. In unserem im Anwendungsfall verwenden wir für R7 ein Widerstand von 6,8kOhm. Der Eingang erhält noch eine zusätzliche Entkopplungsdiode D3.
+Damit die Transistorstufe zuverlässig arbeitet, kommt zusätzlich der Widerstand R7 zu Anwendung. Er vermeidet, dass der Transistor bei offenenem Eingang durch Störeinstrahlung teilweise leitet, indem er den Basisanschluss auf die Versorgungsspannung vorspannt, so dass der Transistor sperrt. In unserem im Anwendungsfall verwenden wir für R7 ein Widerstand von 6,8kOhm. Der Inverter erhält noch eine zusätzliche D3 um die Schaltschwelle von 0,7V anzuheben. Die Differenz zur Schaltschwelle der Messstufe beträgt somit ca. 1V.
 
 ### Strombegrenzung am Ausgang
 Da die Anschaltung von La1 erfolgt extern und der PNP-Transistor bei einer Fehlbeschaltung vom Kollektor nicht zerstört wird, wird eine Strombegrenzung eingebracht.
@@ -92,41 +80,26 @@ Die Verlustleistung am Transistor beträgt bei _Kurzschluss_ ebenfalls nur ca. 0
          = (15V – 2,6V) * 26A
          = 322mW
 
-## Invertieren der Messstufe
-Es soll mit _positiver_ Logik geschaltet werden, also fügen wir eine NPN-Schaltstufe hinzu, die den Eingang der PNP-Schaltstufe versorgt. Zur Anwendung kommt der passende NPN-Transistor Typ BC547B (Datenblatt: [BC547.pdf](https://www.fairchildsemi.com/datasheets/BC/BC547.pdf)).
-
-![Invertieren der Messstufe](../images/Invertieren_der_Messstufe.png)
-
-Die Dimensionierung der Inverterstufe muss passend zu den anliegenden Pegeln erfolgen. Die Ansteuerung erfolgt in Abhängigkeit von der _Messstufe_. Im Schaltzustand _High_ liegt die Versorgungsspannung Ubat über den Widerstand R3 an. Im _Low_-Zustand hat das Potenzial Uz + Uce(sat):
-
-    Uol = Uz + Uce(sat)
-        = 2,7V + 0,3V
-        = 3V
-
-Der Widerstand R5 vermeidet, dass der Transistor bei Störeinstrahlungen teilweise leitet. Die Z-Diode hat den Zweck die Schaltschwelle über den Transistor zu erhöhen, was hier bedeutet, dass die Schaltschwelle für den Pegel _High_ verschoben wird. Die zugehörige Schaltschwelle Uih lässt wie folgt errechnen:
-
-    Uih = Uz + Ube
-        = 3,3V + 0,7V
-        = 4V
-
-Die Differenz zur Schaltschwelle der Messstufe beträgt somit ca. 1V.
-
 ## Einbringen einer Hysterese
-Der _Messtufe_ wird bei minimalen Über- oder Unterschreiten der Referenzspannung bzw. der definierten Eingangsspannung hin und her kippen. Durch Einbringung definierter Schaltschwellen, die sich voneinander durch eine entsprechende Spannungsdifferenz unterscheiden, kann jedoch das Gesamtverhalten gegenüber Rauschen oder Störsignale verbessert werden.
+Der Differenzverstärker wird bei minimalen Über- oder Unterschreiten der Eingangsspannung hin und her kippen. Durch Einbringung definierter Schaltschwellen, die sich voneinander durch eine entsprechende Spannungsdifferenz unterscheiden, kann jedoch das Gesamtverhalten gegenüber Rauschen oder Störsignale verbessert werden.
 
-Die Erzeugung dieser Schalthysterese kann mit Hilfe einer Mitkopplung erreicht werden. In unserem Fall indem ein Teil der Ausgangsspannung von der _Inverterstufe_ an den Eingang Ref der _Messtufe_ zurückgeführt wird. Dazu wird lediglich ein Widerstand (R9) benötigt.
+Die Erzeugung dieser Schalthysterese kann mit Hilfe einer Mitkopplung erreicht werden. In unserem Fall indem ein Teil der Ausgangsspannung an den positiven Eingang des Differenzverstärkers zurückgeführt wird. Dazu wird lediglich ein Widerstand (R9) benötigt.
 
-Eine solche Schaltung wird als (nicht-invertierender) [Schmitt-Trigger](https://de.wikipedia.org/wiki/Schmitt-Trigger) bezeichnet. Berechnet wird die Hysterese durch Nutzung folgender Formeln (bei Uin ca. Ubat und unter Vernachlässigung von R5, weil R9 viel größer R5):
+Eine solche Schaltung wird als (nicht-invertierender) [Schmitt-Trigger](https://de.wikipedia.org/wiki/Schmitt-Trigger) bezeichnet. Berechnet wird die Hysterese durch Nutzung folgender Formeln (bei Uin ca. Ubat und unter Vernachlässigung von R6, bei R9 viel größer R6):
 
     U(low) = Uref * (R1||R9 + R2) / R2
-           = (Uz + Ube) * (R1/R2 * R9/(R1+R9) + 1)
-           = 3,4V * (22k/8,2k * 220k/(22k+220k) + 1)
-           = 11,7V
+           = Uz * (R1/R2 * R9/(R1+R9) + 1)
+           = 6,2V * (10k/10k * 100k/(10k+100k) + 1)
+           = 11,8V
 
     U(high) = Uref * (R1 + R2||R9) / (R2||R9)
-            = (Uz + Ube) * (R1/R2 * (R2+R9)/R9 + 1)
-            = 3,4V * (22k/8,2k * (8,2k+220k)/220k + 1)
-            = 12,9V
+            = Uz * (R1/R2 * (R2+R9)/R9 + 1)
+            = 6,2V * (10k/10k * (10k+100k)/100k + 1)
+            = 13,0V
+
+Wird am Eingang die Spannung von 13V überschritten, geht der Differenzverstärker in die positive Sättigung und der Ausgang ist logisch _High_, bei unterschreiten der Spannung von 11,8V, geht er in die negative Sättigung und der Ausgang ist logisch _Low_.
+
+Zum Schutz vor positiven und negativen Spannungsspitzen sind zusätzlich Dioden vom Typ 1N4148 ampositiven Eingang des Differenzverstärkers eingesetzt. Der Kondensator C1 bildet zusammen mit R1 ein Tiefpass, damit keine Störsignale an der Basis vom Transistor T1 gelangen.
 
 ## Quellen und weiterführende Literatur
 
