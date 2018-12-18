@@ -42,7 +42,7 @@ Der Öldrucksensor schaltet gegen Masse bei Öldruckverlust. Die Anschaltung und
 ![Astabile Kippstufe Abb. 2](../images/Astabile_Kippstufe_2.png)
 
 ## Gesamtschaltung Öldruckkontrollanzeige
-Die gesamte Schaltung erhält noch die bereits verwendete Schaltstufe zur Anschaltung der Kontrollampe La1 (siehe [hier](kontrollanzeige_1.html)). Der Abgriff erfolgt nicht direkt sondern an der Entkopplungsdiode.
+Die gesamte Schaltung erhält noch die bereits verwendete Schaltstufe zur Anschaltung der Kontrollampe La1 (siehe [hier](kontrollanzeige_1.html)). Der Abgriff erfolgt nicht direkt sondern mit eigener Entkopplungsdiode an der Basis vom Transistor.
 
 ![Gesamtschaltung Öldruckkontrollanzeige](../images/Oeldruckkontrollanzeige.png)
 

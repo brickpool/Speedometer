@@ -83,6 +83,8 @@ Die Verlustleistung am Transistor beträgt bei _Kurzschluss_ ebenfalls nur ca. 0
 ## Einbringen einer Hysterese
 Der Differenzverstärker wird bei minimalen Über- oder Unterschreiten der Eingangsspannung hin und her kippen. Durch Einbringung definierter Schaltschwellen, die sich voneinander durch eine entsprechende Spannungsdifferenz unterscheiden, kann jedoch das Gesamtverhalten gegenüber Rauschen oder Störsignale verbessert werden.
 
+![Nichtinvertierender Schmitt-Trigger](../images/Nichtinvertierender_Schmitt_Trigger.png)
+
 Die Erzeugung dieser Schalthysterese kann mit Hilfe einer Mitkopplung erreicht werden. In unserem Fall indem ein Teil der Ausgangsspannung an den positiven Eingang des Differenzverstärkers zurückgeführt wird. Dazu wird lediglich ein Widerstand (R9) benötigt.
 
 Eine solche Schaltung wird als (nicht-invertierender) [Schmitt-Trigger](https://de.wikipedia.org/wiki/Schmitt-Trigger) bezeichnet. Berechnet wird die Hysterese durch Nutzung folgender Formeln (bei Uin ca. Ubat und unter Vernachlässigung von R6, bei R9 viel größer R6):

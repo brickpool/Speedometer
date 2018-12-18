@@ -6,29 +6,14 @@ description: Universal LCD Motorrad Tachometer
 
 Eine Lösung in diskreter Form ist ebenfalls möglich. Gewünscht sind (negative) Impulse der doppelten Frequenz zum Eingangssignal. Um eine Impulsdopplung zu erzeugen, wird die als Impulsformer wirkende monostabile Kippstufe um zwei Zeitglieder erweitert. Die steigende und fallende Flanke der Monostabilen Kippstufe dienen als Steuerflanken, die auf zwei weitere Zeitglieder wirken. Jedes Zeitglied erzeugt aus der jeweiligen Flanke ein `high`-Signal von 1ms. Die Steuersignale werden anschließend NOR-verknüpft und mittes eines RC-Differenzierers werden die benötigten negative Impulse erzeugt. Folgend die schemtische Darstellung:
 
-```
-              :           : Monoflop R :            :
-              :           : 1ms        :            :
-                                             Vcc ^ 
-                                                 |
-                                                .-. Pullup
-                                                | |
-                .-----.      .-----.  .-----.   '-'
-Kl.1 ___        | 1/\ |-----o> 1/\ |--| >=1 |    |
- o--|___|--+---->     |      '-----'  |     | OC |   .----.
-          .-.   |     |      .-----.  |     |o<>-+---|d/dt|----o
-          | |   |     |o----o> 1/\ |--|     |        '----'
-          '-'   '-----'      '-----'  '-----'
-           |
-          ===
-              : Monostab. :            :            : 
-  Eingang-    : Kippstufe : Monoflop F : NOR (=NOT+ : Differenzierer
-  schutz      : ~ 2,5ms   : /1ms       : Wired-AND) : /500us
-```
+![Schematische Darstellung Zündsignalwandler](../images/Zuendsignalwandler_1.png)
 
 Laut Definition sind Kippschaltungen digitale Schaltung mit sprunghaftem Übertragungsverhalten, verursacht durch Rückkopplung. Eine Monostabile Kippstufe ohne Mittkoplungswiderstand ist vielleicht keine Kippstufe laut Definition, aber durchaus ein zeitgebendes Schaltungselement. Folgend als Monoflop bezeichnet.
 
 ### Kurzbeschreibung der Monostabilen Kippstufe
+
+![Monostabilen Kippstufe](../images/Monostabilen_Kippstufe.png)
+
 Eine ausführliche Beschreibung der Schaltung für die Geberplatine erfolgte bereits im [Teil 1](zuendsignalwandler_1.html). Zusammengefasst lässt sich die Schaltung wie folgt erklären:
 1. Im Ruhezustand wird T44 über R13 und R14 in die Sättigung gezogen, damit hat Pin 8 annähernd 0V, T42 ist gesperrt und der zugehörige _Kollektorausgang_ von T42 hat Vcc.
 2. Ein kurzer positiver Puls macht T42 leitend und es entsteht ein negativer Puls, der über C27 an die Basis von T44 weitergegeben wird.
@@ -44,6 +29,9 @@ Die nachgelagerten Schaltstufen für die Monoflops werden am jeweiligen Kollekto
 Da beide Monoflops rückkopplungsfrei arbeiten (was auch die Störsicherheit erhöht), muss die eingestellte Impuls- und Rückstellzeit vom Monoflop immer kürzer sein, als die erzeugte Impulszeit der vorgelagerten Monostabilen Kippstufe.
 
 ### Kurzbeschreibung Monoflop R
+
+![Monoflop R](../images/Monoflop_R.png)
+
 Transistor T44 und Widerstand R15 bilden zusammen mit dem Transistor Tr und den zeitsteuenden Elementen Cr und Rr das rückkopplungsfreie Monoflop R (steigende Flanke).
 
 1. Wenn T44 in den leitenden Zustand wechselt wird eine fallende Flanke am Pin 8 erzeugt
@@ -70,6 +58,9 @@ Transistor T42 und Widerstand R12 bilden zusammen mit dem Transistor Tf und den 
 Die Verweildauer t1f (und Erholszeit t2f = `5*Cf*R12`) soll gleich t1s sein. Rf und Cf haben daher die gleichen Werte wie Cs und Rs.
 
 ### Kurzbeschreibung NOR-Funktion
+
+![NOR-Funktion](../images/NOR-Funktion.png)
+
 Die invertierten Signale der beiden Monoflop-Ausgänge werden mittels [Wired-AND-Logik](http://de.wikipedia.org/wiki/Wired-AND) zu einem [NOR](http://www.play-hookey.com/digital_experiments/dtl/dtl_nor2.html) verknüft.
 
 1. Das Signal wird mittels einer direkt gekopppelten Transistorschaltstufe invertiert ([DCTL](http://en.wikipedia.org/wiki/Direct-coupled_transistor_logic)).
