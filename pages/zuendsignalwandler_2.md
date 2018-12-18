@@ -69,7 +69,7 @@ Die invertierten Signale der beiden Monoflop-Ausgänge werden mittels [Wired-AND
 ## Quellen und weiterführende Literatur
 
 ### Links
-- WartburgPeter.de; [Drehzahlmesser (Aufbauinstrument mit A277D)](www.wartburgpeter.de/download/dzm.pdf)
+- WartburgPeter.de; [Drehzahlmesser (Aufbauinstrument mit A277D)](http://www.wartburgpeter.de/download/dzm.pdf)
 - Wikipedia; [Monostabile Kippstufe](http://de.wikipedia.org/wiki/Monostabile_Kippstufe)
 - Siemens; Halbleiter-Schaltbeispiele Ausgabe April 1970; [4.1 Taktgeber mit vielen Anwendungsmöglichkeiten](http://www.fingers-welt.de/info/siemens_schaltbeispiele_1970_1.pdf)
 - Texas Instruments; Design and Application of Transistor Switching Circuits; [14 Pulse-generating and Pulse-shaping Networks](http://archive.org/details/DesignAndApplicationOfTransistorSwitchingCircuits/page/n279)
