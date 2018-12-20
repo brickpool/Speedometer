@@ -101,7 +101,7 @@ Eine solche Schaltung wird als (nicht-invertierender) [Schmitt-Trigger](https://
 
 Wird am Eingang die Spannung von 13V überschritten, geht der Differenzverstärker in die positive Sättigung und der Ausgang ist logisch _High_, bei unterschreiten der Spannung von 11,8V, geht er in die negative Sättigung und der Ausgang ist logisch _Low_.
 
-Zum Schutz vor positiven und negativen Spannungsspitzen sind zusätzlich Dioden vom Typ 1N4148 ampositiven Eingang des Differenzverstärkers eingesetzt. Der Kondensator C1 bildet zusammen mit R1 ein Tiefpass, damit keine Störsignale an der Basis vom Transistor T1 gelangen.
+Zum Schutz vor positiven und negativen Spannungsspitzen sind zusätzlich Dioden vom Typ BAV20 am positiven Eingang des Differenzverstärkers eingesetzt. Der Kondensator C1 bildet zusammen mit R1 ein Tiefpass, damit keine Störsignale an der Basis vom Transistor T1 gelangen.
 
 ## Quellen und weiterführende Literatur
 
@@ -112,6 +112,7 @@ Zum Schutz vor positiven und negativen Spannungsspitzen sind zusätzlich Dioden 
 - Wikipedia; [Starterbatterie](http://de.wikipedia.org/wiki/Starterbatterie#Wartung,_Pflege_und_Prüfung)
 - Wikipedia; [Konstantstromquelle](http://de.wikipedia.org/wiki/Konstantstromquelle#Mit_Bipolartransistor)
 - Mikrocontroller.net; [Unterspannungsabschaltung gesucht](http://www.mikrocontroller.net/topic/340319#3744991)
+- Siemens; Halbleiter-Schaltbeispiele Ausgabe April 1970; [5.2.3 Schaltverstärker mit Selbsthaltung](http://www.fingers-welt.de/info/siemens_schaltbeispiele_1970_1.pdf)
 
 ### Nächste Seite
 Weiter geht's mit [Öldruckkontrollanzeige](kontrollanzeige_2.html).

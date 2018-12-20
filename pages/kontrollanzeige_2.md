@@ -50,7 +50,6 @@ Die gesamte Schaltung erhält noch die bereits verwendete Schaltstufe zur Anscha
 
 ### Links
 - Wikipedia; [Multivibrator](https://de.wikipedia.org/wiki/Multivibrator#Astabile_Kippstufe_mit_Transistoren)
-- Siemens; Halbleiter-Schaltbeispiele Ausgabe April 1970; [5.2.3 Schaltverstärker mit Selbsthaltung](http://www.fingers-welt.de/info/siemens_schaltbeispiele_1970_1.pdf)
 - Texas Instruments; Design and Application of Transistor Switching Circuits; [14 Pulse-generating and Pulse-shaping Networks](http://archive.org/details/DesignAndApplicationOfTransistorSwitchingCircuits/page/n285)
 
 ### Nächste Seite
