@@ -34,9 +34,9 @@ Die Benzinstandsanzeige wird mit Hilfe eines zweistufig invertierenden Schaltver
 
 Um die abzuführende Leistung gering zu halten, wird ein Wert von 180 Ohm genutzt. Die maximale Leistung bei direktem Anschluß an Ubat = 15V beträgt 1,25 Watt.  
 
-Die Umschaltspannung Uu von 3,3V wird durch Nutzung der Z-Diode Z1 festgelegt. In Abhängigkeit von der Eingangsspannung wird folgendes Verhalten erzielt: 
-- Sobald am Eingang die Spannung von 3,3V unterschritten wird (Uin < Uu), sperrt der Transistor und am Ausgang liegt der 100 Ohm Widerstand über den Transistor der zweiten Stufe gegen Masse.
-- Sofern die 3,3V überschritten werden (Uin > Uu) leitet der Transistor der ersten Stufe und der Transitor der zweiten Stufe sperrt. Der Ausgang ist somit unbeschaltet.
+Die Umschaltspannung Uu von 5,1V wird durch Nutzung der Z-Diode Z1 festgelegt (Z-Dioden mit Werten < 5V sind bei kleinen Störmen schlecht geeignet, daher wurde hier eine Z-Diode mit einem Wert von 5,1V gewählt). In Abhängigkeit von der Eingangsspannung wird folgendes Verhalten erzielt: 
+- Sobald am Eingang die Spannung von ca. 5V unterschritten wird (Uin < Uu), sperrt der Transistor und am Ausgang liegt der 100 Ohm Widerstand über den Transistor der zweiten Stufe gegen Masse.
+- Sofern die ca. 5V überschritten werden (Uin > Uu) leitet der Transistor der ersten Stufe und der Transitor der zweiten Stufe sperrt. Der Ausgang ist somit unbeschaltet.
 
 Mit einem Eingangswiderstandswert von 10k und einem Widerstand von 6,8k gegen Masse fließt mit Ubat = 10V bis 15V und bei Uin > Uu ein ausreichend großer Basisstrom über R1 zum Transistor der ersten Schaltstufe, um die direkt angekoppelte Schaltstufe ([DCTL](http://en.wikipedia.org/wiki/Direct-coupled_transistor_logic)) bestehend aus R3 und T2 sicher zu schalten. Die Z-Diode Z2 zwischen Basis und Emitter von T2 dient als Strombegrenzung (ca. 26mA) bei Anwendung eines 100 Ohm Widerstandes für die Füllstandsanzeige. Die maximale Leitung für T2 bei direktem Anschluss des _Out_ Ausganges an Ubat = 15V beträgt :
 

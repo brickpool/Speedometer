@@ -91,15 +91,15 @@ Eine solche Schaltung wird als (nicht-invertierender) [Schmitt-Trigger](https://
 
     U(low) = Uref * (R1||R9 + R2) / R2
            = Uz * (R1/R2 * R9/(R1+R9) + 1)
-           = 6,2V * (10k/10k * 100k/(10k+100k) + 1)
-           = 11,8V
+           = 6,2V * (14,7k/10k * 150k/(14,7k+150k) + 1)
+           = 11,9V
 
     U(high) = Uref * (R1 + R2||R9) / (R2||R9)
             = Uz * (R1/R2 * (R2+R9)/R9 + 1)
-            = 6,2V * (10k/10k * (10k+100k)/100k + 1)
-            = 13,0V
+            = 6,2V * (14,7k/10k * (10k+150k)/150k + 1)
+            = 13,1V
 
-Wird am Eingang die Spannung von 13V überschritten, geht der Differenzverstärker in die positive Sättigung und der Ausgang ist logisch _High_, bei unterschreiten der Spannung von 11,8V, geht er in die negative Sättigung und der Ausgang ist logisch _Low_.
+Wird am Eingang die Spannung von ca. 13V überschritten, geht der Differenzverstärker in die positive Sättigung und der Ausgang ist logisch _High_, bei unterschreiten der Spannung von ca. 12V, geht er in die negative Sättigung und der Ausgang ist logisch _Low_.
 
 Zum Schutz vor positiven und negativen Spannungsspitzen sind zusätzlich Dioden vom Typ BAV20 am positiven Eingang des Differenzverstärkers eingesetzt. Der Kondensator C1 bildet zusammen mit R1 ein Tiefpass, damit keine Störsignale an der Basis vom Transistor T1 gelangen.
 
