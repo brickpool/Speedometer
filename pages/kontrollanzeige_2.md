@@ -32,9 +32,9 @@ Je größer die Werte von R1 und R4 sind, umso _verschliffener_ ist die positive
        < 660k
 
 ## Erweiterung Astabile Kippstufe
-Die Flankensteilheit der positiven Flanke kann verbessert werden, indem man den Transistor mit einer Diode vom Kondensator entkoppelt. Die Flankensteilheit am Ausgang kann durch diese Maßnahme um den Faktor 10 verbessert werden. Damit der Kollektorstrom Ic (und der mindest Basisstrom Ib) bei Durchschalten von T2 ungefähr gleich bleibt, muss der Widerstandswert für R4 angepasst werden:
+Die Flankensteilheit der positiven Flanke kann verbessert werden, indem man den Transistor mit einer Diode D3 vom Kondensator C2 entkoppelt. Die Flankensteilheit am Ausgang kann durch diese Maßnahme um den Faktor 10 verbessert werden. Damit der Kollektorstrom Ic (und der mindest Basisstrom Ib) bei Durchschalten von T2 ungefähr gleich bleibt, muss der Widerstandswert für R4 angepasst werden:
 
-    R4 = R4a||R4a = 10k
+    R4 = R4a||R4b = 10k
     R4a = R4b = 20k
 
 Der Öldrucksensor schaltet gegen Masse bei Öldruckverlust. Die Anschaltung und Aktivierung des Multivibrators erfolgt mittels geeigneter Transisor-Logik. Der PNP-Transistoren T3 dient zusammen mit Widerstand R5 als invertierende Schaltstufe, um den Multivibrator _freizugeben_. D4 dient zum Schutz vor Überspannung und D5 schützt den Transsitor T3 vor negativen Spannungen. Da die Basis vom Transistor T3 im Ruhezustand unbeschaltet ist, kommt R6 zum Einsatz.
@@ -42,7 +42,7 @@ Der Öldrucksensor schaltet gegen Masse bei Öldruckverlust. Die Anschaltung und
 ![Astabile Kippstufe Abb. 2](../images/Astabile_Kippstufe_2.png)
 
 ## Gesamtschaltung Öldruckkontrollanzeige
-Die gesamte Schaltung erhält noch die bereits verwendete Schaltstufe zur Anschaltung der Kontrollampe La1 (siehe [hier](kontrollanzeige_1.html)). Der Abgriff erfolgt nicht direkt sondern mit eigener Entkopplungsdiode an der Basis vom Transistor.
+Die gesamte Schaltung erhält noch die bereits verwendete Verstärkerschaltstufe zur Anschaltung der Kontrollampe La1 (siehe [hier](kontrollanzeige_1.html)). Der Abgriff erfolgt nicht direkt sondern mit eigener Entkopplungsdiode an der Basis vom Transistor.
 
 ![Gesamtschaltung Öldruckkontrollanzeige](../images/Oeldruckkontrollanzeige.png)
 
